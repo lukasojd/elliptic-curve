@@ -4,9 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications | Elliptic Curve Lab</title>
+    <meta name="description" content="Technical reports and research papers on elliptic curve cryptography, ECDLP algorithms, and mathematical foundations.">
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Elliptic Curve Lab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lukasojd.github.io/elliptic-curve/publications/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lukasojd.github.io/elliptic-curve/publications/">
+    <meta property="og:title" content="Publications | Elliptic Curve Lab">
+    <meta property="og:description" content="Technical reports and research papers on elliptic curve cryptography, ECDLP algorithms, and mathematical foundations.">
+    <meta property="og:site_name" content="Elliptic Curve Lab">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Publications | Elliptic Curve Lab">
+    <meta name="twitter:description" content="Technical reports and research papers on elliptic curve cryptography, ECDLP algorithms, and mathematical foundations.">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        :root{--color-bg:#0d1117;--color-bg-secondary:#161b22;--color-text:#c9d1d9;--color-text-muted:#8b949e;--color-accent:#58a6ff;--color-border:#30363d;--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--max-width:900px;--spacing:1.5rem}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;line-height:1.6}body{margin:0;padding:0;font-family:var(--font-sans);background-color:var(--color-bg);color:var(--color-text)}.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing)}.site-header{background-color:var(--color-bg-secondary);border-bottom:1px solid var(--color-border);padding:1rem 0;position:sticky;top:0;z-index:100}.site-header .container{display:flex;justify-content:space-between;align-items:center}.site-logo{display:flex;align-items:center;text-decoration:none;color:var(--color-text);font-weight:600;font-size:1.2rem}.logo-symbol{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;background:linear-gradient(135deg,var(--color-accent),#a855f7);border-radius:6px;margin-right:.75rem;font-weight:700;color:#fff}.main-nav{display:flex;gap:1.5rem}.main-nav a{color:var(--color-text-muted);text-decoration:none;font-size:.95rem}.site-main{padding:3rem 0;min-height:calc(100vh - 200px)}
+    </style>
+
+    <!-- Preload main stylesheet -->
+    <link rel="preload" href="/elliptic-curve/assets/css/style.css" as="style">
     <link rel="stylesheet" href="/elliptic-curve/assets/css/style.css">
 
-    <!-- MathJax for LaTeX rendering -->
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Elliptic Curve Lab",
+        "url": "https://lukasojd.github.io/elliptic-curve/",
+        "description": "Research project exploring the mathematical foundations of ECDLP",
+        "author": {
+            "@type": "Person",
+            "name": "L. Kriz"
+        }
+    }
+    </script>
+
+    <!-- MathJax for LaTeX rendering (deferred) -->
     <script>
         MathJax = {
             tex: {
@@ -16,19 +66,26 @@
             },
             svg: {
                 fontCache: 'global'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                }
             }
         };
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="site-header">
         <div class="container">
-            <a href="/elliptic-curve/" class="site-logo">
-                <span class="logo-symbol">E</span>
+            <a href="/elliptic-curve/" class="site-logo" aria-label="Elliptic Curve Lab Home">
+                <span class="logo-symbol" aria-hidden="true">E</span>
                 <span class="logo-text">Elliptic Curve Lab</span>
             </a>
-            <nav class="main-nav">
+            <nav class="main-nav" aria-label="Main navigation">
                 <a href="/elliptic-curve/">Home</a>
                 <a href="/elliptic-curve/blog/">Blog</a>
                 <a href="/elliptic-curve/publications/">Publications</a>
@@ -37,7 +94,7 @@
         </div>
     </header>
 
-    <main class="site-main">
+    <main class="site-main" id="main-content">
         <div class="container">
             <section class="publications">
     <h1>Publications & Reports</h1>

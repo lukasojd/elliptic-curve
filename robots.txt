@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lukasojd.github.io/elliptic-curve/sitemap.xml
