@@ -41,14 +41,20 @@
         <div class="container">
             <section class="hero">
     <h1>Elliptic Curve Lab</h1>
-    <p class="tagline">Research notes and knowledge base for elliptic curve mathematics and cryptography.</p>
+    <p class="tagline">Exploring the mathematical foundations of ECDLP — not to break cryptography, but to understand why it works.</p>
 </section>
 
 <section class="intro">
     <p>
-        Welcome to Elliptic Curve Lab — a personal research blog and knowledge archive dedicated
-        to exploring the mathematics and applications of elliptic curves. From fundamental theory
-        to practical implementations, this site documents ongoing research and learning in the field.
+        Welcome to Elliptic Curve Lab — a long-term research project dedicated to understanding
+        the <strong>Elliptic Curve Discrete Logarithm Problem (ECDLP)</strong>. We explore the
+        mathematical structures, algorithms, and theoretical limits that make elliptic curve
+        cryptography secure.
+    </p>
+    <p>
+        Our goal is not to find practical attacks on Bitcoin or other systems. Instead, we seek
+        to map the "space of all possible speedups" and understand the <strong>fundamental barrier</strong>
+        that prevents classical algorithms from solving ECDLP faster than $O(\sqrt{n})$.
     </p>
 </section>
 
@@ -72,20 +78,42 @@
     <h2>Research Areas</h2>
     <div class="topic-grid">
         <div class="topic">
-            <h3>Curve Arithmetic</h3>
-            <p>Point addition, scalar multiplication, coordinate systems, and efficient algorithms.</p>
+            <h3>Curve Models</h3>
+            <p>Weierstrass, Montgomery, Edwards — how different representations affect arithmetic complexity and security.</p>
         </div>
         <div class="topic">
-            <h3>Number Theory</h3>
-            <p>Group structure, isogenies, endomorphisms, and the mathematical foundations of EC.</p>
+            <h3>Isogenies & Endomorphisms</h3>
+            <p>Mappings between curves, GLV endomorphisms, complex multiplication, and their implications for ECDLP.</p>
         </div>
         <div class="topic">
-            <h3>Cryptographic Protocols</h3>
-            <p>ECDSA, ECDH, threshold signatures, and modern cryptographic constructions.</p>
+            <h3>Attack Algorithms</h3>
+            <p>Pollard's rho, Pohlig-Hellman, index calculus variants, MOV attack, and summation polynomials.</p>
         </div>
         <div class="topic">
-            <h3>Implementation</h3>
-            <p>Field arithmetic, constant-time code, GPU acceleration, and performance optimization.</p>
+            <h3>Theoretical Limits</h3>
+            <p>Why is sub-$\sqrt{n}$ so hard? Exploring no-go theorems and the geometry of the problem.</p>
+        </div>
+    </div>
+</section>
+
+<section class="values">
+    <h2>Research Values</h2>
+    <div class="topic-grid">
+        <div class="topic">
+            <h3>Formal Proofs</h3>
+            <p>Every claim is supported by rigorous mathematical argumentation — no speculation.</p>
+        </div>
+        <div class="topic">
+            <h3>Reproducible Experiments</h3>
+            <p>All code is open-source. Results can be verified and built upon by the community.</p>
+        </div>
+        <div class="topic">
+            <h3>Negative Results Matter</h3>
+            <p>Dead ends are documented thoroughly — knowing what doesn't work is valuable knowledge.</p>
+        </div>
+        <div class="topic">
+            <h3>Open Science</h3>
+            <p>Research reports, blog posts, and code are freely available for everyone.</p>
         </div>
     </div>
 </section>

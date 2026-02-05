@@ -40,55 +40,86 @@
     <main class="site-main">
         <div class="container">
             <section class="about">
-    <h1>About</h1>
+    <h1>About This Project</h1>
 
     <div class="about-content">
+        <h2>What We Do</h2>
         <p>
-            <strong>Elliptic Curve Lab</strong> is a personal research blog and knowledge archive
-            focused on elliptic curve mathematics and cryptography. The primary purpose is to
-            document research progress, preserve insights, and share knowledge with the community.
+            <strong>Elliptic Curve Lab</strong> is a long-term research program focused on understanding
+            the Elliptic Curve Discrete Logarithm Problem (ECDLP). We study the mathematical structures
+            underlying elliptic curve cryptography — with special attention to the secp256k1 curve used
+            in Bitcoin.
+        </p>
+        <p>
+            <strong>Our goal is not to break real-world cryptography.</strong> Instead, we seek deep
+            mathematical understanding: Why is ECDLP so hard? What makes $O(\sqrt{n})$ the barrier?
+            Are there hidden structures that could — in theory — be exploited?
         </p>
 
-        <h2>Purpose</h2>
+        <h2>The Fundamental Question</h2>
         <p>
-            This site serves as:
+            After decades of research, no classical algorithm can solve ECDLP on a general curve
+            faster than $O(\sqrt{n})$, where $n$ is the group order. For a 256-bit curve, this means
+            roughly $2^{128} \approx 3.4 \times 10^{38}$ operations — completely infeasible.
         </p>
+        <p>
+            We ask: <strong>Why?</strong> Is there a deeper geometric or algebraic reason? Can we
+            formulate no-go theorems that explain this barrier? Or is there some overlooked structure
+            that could provide a shortcut?
+        </p>
+
+        <h2>What We Study</h2>
         <ul>
-            <li>A research notebook for ongoing elliptic curve studies</li>
-            <li>A knowledge base preserving mathematical insights and discoveries</li>
-            <li>A collection of implementation notes and optimization techniques</li>
-            <li>A reference for future work and collaboration</li>
+            <li><strong>Curve models:</strong> Weierstrass, Montgomery, Edwards, and their computational trade-offs</li>
+            <li><strong>Isogenies:</strong> Mappings between curves and their security implications</li>
+            <li><strong>Endomorphisms:</strong> GLV optimization, complex multiplication, automorphism groups</li>
+            <li><strong>Attack algorithms:</strong> Pollard's rho, Pohlig-Hellman, index calculus, MOV attack</li>
+            <li><strong>Special structures:</strong> Curves with $j$-invariant 0, CM curves, embedding degree</li>
+            <li><strong>Theoretical limits:</strong> Lower bounds, generic group model, no-go arguments</li>
         </ul>
 
-        <h2>Topics</h2>
-        <p>
-            Research areas covered include:
-        </p>
-        <ul>
-            <li>Elliptic curve group structure and arithmetic</li>
-            <li>Coordinate systems (affine, projective, Jacobian, Montgomery)</li>
-            <li>Scalar multiplication algorithms</li>
-            <li>Endomorphisms and isogenies</li>
-            <li>The discrete logarithm problem and related algorithms</li>
-            <li>Cryptographic protocols (ECDSA, ECDH, etc.)</li>
-            <li>Efficient implementation techniques</li>
-        </ul>
+        <h2>Research Values</h2>
 
-        <h2>Mathematical Background</h2>
+        <h3>Formal Correctness</h3>
         <p>
-            An elliptic curve over a field $K$ is defined by the Weierstrass equation:
+            Every claim is backed by rigorous mathematical proof or clear justification. We don't
+            speculate — we prove, or we say we don't know.
         </p>
-        <p class="math-display">
-            $$y^2 = x^3 + ax + b$$
+
+        <h3>Reproducible Experiments</h3>
+        <p>
+            We develop algorithm prototypes, measure their performance, and publish all code.
+            Anyone can verify our results and build upon them.
+        </p>
+
+        <h3>Negative Results Are Valuable</h3>
+        <p>
+            When an approach doesn't work, we document exactly why it failed. Systematic refutation
+            of dead ends is part of our mission — it saves others from repeating the same mistakes.
+        </p>
+
+        <h3>Open Science</h3>
+        <p>
+            All outputs — research reports, blog articles, source code — are freely available.
+            This supports credibility and enables collaboration.
+        </p>
+
+        <h2>Long-Term Vision</h2>
+        <p>
+            This is not a single paper or a quick project. We aim to systematically map the entire
+            "space of possible speedups" for ECDLP — every known technique, every theoretical limit,
+            every dead end. The goal is to understand, once and for all, what makes this problem hard.
         </p>
         <p>
-            where $4a^3 + 27b^2 \neq 0$ (non-singular condition). The set of points
-            forms an abelian group with the point at infinity as identity.
+            If we find that no sub-$\sqrt{n}$ breakthrough is possible, we want to explain why
+            convincingly. If we discover something new — even impractical — it advances our
+            understanding of one of cryptography's most important problems.
         </p>
 
         <h2>Contact</h2>
         <p>
-            For questions, corrections, or collaboration opportunities, please reach out via GitHub.
+            For questions, corrections, or collaboration, please reach out via
+            <a href="https://github.com/lukasojd/elliptic-curve">GitHub</a>.
         </p>
     </div>
 </section>
