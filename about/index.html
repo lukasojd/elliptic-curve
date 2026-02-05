@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Elliptic Curve Lab</title>
+    <link rel="stylesheet" href="/elliptic-curve-lab/assets/css/style.css">
+
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/elliptic-curve-lab/" class="site-logo">
+                <span class="logo-symbol">E</span>
+                <span class="logo-text">Elliptic Curve Lab</span>
+            </a>
+            <nav class="main-nav">
+                <a href="/elliptic-curve-lab/">Home</a>
+                <a href="/elliptic-curve-lab/blog/">Blog</a>
+                <a href="/elliptic-curve-lab/publications/">Publications</a>
+                <a href="/elliptic-curve-lab/about/">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
+            <section class="about">
+    <h1>About</h1>
+
+    <div class="about-content">
+        <p>
+            <strong>Elliptic Curve Lab</strong> is a personal research blog and knowledge archive
+            focused on elliptic curve mathematics and cryptography. The primary purpose is to
+            document research progress, preserve insights, and share knowledge with the community.
+        </p>
+
+        <h2>Purpose</h2>
+        <p>
+            This site serves as:
+        </p>
+        <ul>
+            <li>A research notebook for ongoing elliptic curve studies</li>
+            <li>A knowledge base preserving mathematical insights and discoveries</li>
+            <li>A collection of implementation notes and optimization techniques</li>
+            <li>A reference for future work and collaboration</li>
+        </ul>
+
+        <h2>Topics</h2>
+        <p>
+            Research areas covered include:
+        </p>
+        <ul>
+            <li>Elliptic curve group structure and arithmetic</li>
+            <li>Coordinate systems (affine, projective, Jacobian, Montgomery)</li>
+            <li>Scalar multiplication algorithms</li>
+            <li>Endomorphisms and isogenies</li>
+            <li>The discrete logarithm problem and related algorithms</li>
+            <li>Cryptographic protocols (ECDSA, ECDH, etc.)</li>
+            <li>Efficient implementation techniques</li>
+        </ul>
+
+        <h2>Mathematical Background</h2>
+        <p>
+            An elliptic curve over a field $K$ is defined by the Weierstrass equation:
+        </p>
+        <p class="math-display">
+            $$y^2 = x^3 + ax + b$$
+        </p>
+        <p>
+            where $4a^3 + 27b^2 \neq 0$ (non-singular condition). The set of points
+            forms an abelian group with the point at infinity as identity.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+            For questions, corrections, or collaboration opportunities, please reach out via GitHub.
+        </p>
+    </div>
+</section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Elliptic Curve Lab. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
