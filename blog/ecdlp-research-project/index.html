@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding ECDLP: A Research Project on the Hardness of Elliptic Curve Cryptography | Elliptic Curve Lab</title>
+    <link rel="stylesheet" href="/elliptic-curve/assets/css/style.css">
+
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <a href="/elliptic-curve/" class="site-logo">
+                <span class="logo-symbol">E</span>
+                <span class="logo-text">Elliptic Curve Lab</span>
+            </a>
+            <nav class="main-nav">
+                <a href="/elliptic-curve/">Home</a>
+                <a href="/elliptic-curve/blog/">Blog</a>
+                <a href="/elliptic-curve/publications/">Publications</a>
+                <a href="/elliptic-curve/about/">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
+            <article class="blog-post">
+    <header class="post-header">
+        <h1>Understanding ECDLP: A Research Project on the Hardness of Elliptic Curve Cryptography</h1>
+        <div class="post-meta">
+            <time datetime="February 05, 2026">February 05, 2026</time>
+            <span class="tags">ecdlp, secp256k1, cryptography, research</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h1 id="introduction">Introduction</h1>
+<p>Elliptic curves are one of the pillars of modern cryptography. The
+security of many systems—including Bitcoin—rests on the difficulty of
+the so-called <strong>Elliptic Curve Discrete Logarithm Problem
+(ECDLP)</strong>.</p>
+<p>Formally, given a base point <span class="math inline">\(G\)</span>
+on an elliptic curve and a public point <span class="math inline">\(Q =
+[d]G\)</span> (the scalar multiple of <span
+class="math inline">\(G\)</span> by some unknown integer <span
+class="math inline">\(d\)</span>), the task is to recover the value of
+<span class="math inline">\(d\)</span>. For sufficiently large
+parameters, this problem is considered computationally intractable—no
+known classical algorithm can solve ECDLP on a general curve faster than
+exponential time.</p>
+<p>The best known approach, <strong>Pollard’s rho algorithm</strong>,
+has time complexity of order <span
+class="math inline">\(O(\sqrt{n})\)</span>, where <span
+class="math inline">\(n\)</span> is the group order. For the 256-bit
+curve secp256k1, this means approximately <span
+class="math inline">\(2^{128}\)</span> group operations—roughly <span
+class="math inline">\(10^{38}\)</span> steps—completely beyond the
+capabilities of current hardware.</p>
+<p>In other words, breaking a 256-bit key through brute force or generic
+algorithms is practically impossible. Any potential attack must exploit
+some special structure of the curve or additional information.</p>
+<h1 id="project-goals">Project Goals</h1>
+<p>Our project does not aim to practically break the cryptography of
+Bitcoin or other systems. Instead, we seek a <strong>deeper mathematical
+understanding of ECDLP</strong>—we want to explore why this problem is
+so difficult and what structures, algorithms, or models it conceals.</p>
+<p>The main goal is to extend theoretical knowledge of ECDLP over
+elliptic curves, with special attention to secp256k1. We are not looking
+for practical vulnerabilities for immediate attacks on real
+cryptosystems; rather, we are interested in the <strong>mathematical
+essence of the problem</strong>.</p>
+<p>We examine a wide range of aspects of elliptic curves and discrete
+logarithms:</p>
+<ul>
+<li><p><strong>Classical curve models</strong>: Weierstrass, Edwards,
+Montgomery, and others</p></li>
+<li><p><strong>Isogenies</strong>: mappings between curves and their
+computational implications</p></li>
+<li><p><strong>Arithmetic methods</strong>: efficient algorithms for
+point operations</p></li>
+<li><p><strong>Automorphisms</strong>: internal symmetries and their
+exploitation</p></li>
+<li><p><strong>Special structures</strong>: curves with <span
+class="math inline">\(j\)</span>-invariant 0, complex multiplication
+(CM)</p></li>
+</ul>
+<p>The goal is to describe and unify knowledge about all known—and
+lesser-known—layers of ECDLP: how different models and coordinate
+systems affect computational complexity, how curves can be transformed
+via isogenies, what endomorphisms exist and how they can speed up
+computations, and so on.</p>
+<p>For example, the secp256k1 curve, thanks to complex multiplication
+(the so-called <strong>Gallant–Lambert–Vanstone endomorphism</strong>),
+allows scalar multiplication to be accelerated by approximately 30%.
+However, an attacker can exploit the same advantage, so this special
+structure does not compromise security by itself. (The SafeCurves
+project notes it as a potential risk for a possible future breakthrough,
+but no attack exploiting this additional structure is currently
+known.)</p>
+<p>Our project systematically examines all such possibilities and limits
+of ECDLP on elliptic curves—the aim is to leave nothing out and get to
+the core of the problem.</p>
+<h1 id="research-values">Research Values</h1>
+<p>We emphasize <strong>formal correctness and proofs</strong>. Every
+claim is supported by rigorous mathematical argumentation—instead of
+speculation, we provide proofs or clear justification.</p>
+<p>At the same time, we conduct <strong>reproducible
+experiments</strong>: we develop and publish algorithm prototypes,
+measure their performance on real data, and make results available to
+the community.</p>
+<p><strong>Negative results are just as important as positive
+ones</strong>—systematic refutation of dead ends is part of the project.
+If some attack direction or optimization does not lead to the goal, we
+thoroughly document why it failed so others can learn from it.</p>
+<p>All outputs will be openly published for the community—in the form of
+research reports, blog articles, and freely available code in
+repositories. This <strong>open-source and open-science
+approach</strong> is meant to support the credibility of results and
+enable others to build upon them.</p>
+<h1 id="where-we-are-heading">Where We Are Heading</h1>
+<p>In the longer term, we ask the question: <strong>what constitutes the
+“fundamental barrier” of ECDLP?</strong></p>
+<p>Why, after decades of research, do we not know a classical algorithm
+significantly faster than <span class="math inline">\(\sqrt{n}\)</span>?
+Is there some deeper geometric or algebraic reason why ECDLP is so
+resistant to speedup?</p>
+<p>In our project, we try to map the “space of all possible
+speedups”—that is, all known approaches to potentially facilitate
+solving the discrete logarithm. This includes:</p>
+<ul>
+<li><p><strong>Traditional methods</strong>: Pohlig–Hellman
+decomposition for groups with easily factorable order, index calculus in
+various variants, exploitation of small embedding degree via MOV attack,
+etc.</p></li>
+<li><p><strong>New and less explored ideas</strong>: use of summation
+polynomials, search for special curve parameterizations, machine
+learning over point structures, etc.</p></li>
+</ul>
+<p>We are interested in whether there is a chance for a
+<strong>sub-<span class="math inline">\(\sqrt{n}\)</span>
+breakthrough</strong>—an algorithm that would solve ECDLP faster—and if
+not, why such a breakthrough apparently does not exist.</p>
+<p>We will investigate whether geometric transformations (isogenies,
+special projections) or algebraic properties (complex multiplication,
+special points with low order, higher automorphisms) could provide an
+unexpected shortcut to a solution.</p>
+<p>If we conclude that no fundamental speedup is possible, we want to be
+able to explain this convincingly—ideally formulating conditions or
+<strong>no-go theorems</strong> that exclude such a sub-<span
+class="math inline">\(\sqrt{n}\)</span> breakthrough. Conversely, if we
+discover a new curve model, a new type of arithmetic, or a new
+attack—even if currently impractical—it will be a valuable advance in
+understanding the problem.</p>
+<h1 id="output-style">Output Style</h1>
+<p>Project outputs will be prepared to be <strong>valuable to experts
+while accessible to the broader public</strong> interested in
+mathematics and cryptography.</p>
+<p>Each topic will be examined in depth—first theoretically (including
+formal proofs), then experimentally (algorithm verification,
+measurements, demonstrations), and finally summarized in an
+understandable form.</p>
+<p>We plan to prepare not only technical reports but also more popular
+articles (e.g., on this blog) that explain even complex concepts in a
+readable and illustrative way. The writing style emphasizes readability:
+we highlight important ideas, use clear text structure, graphs, and
+examples.</p>
+<p>We want not only cryptographic experts but also motivated readers
+from the broader community to take away insights from our materials.
+This project has the ambition to <strong>inspire</strong>—to show the
+beauty hidden in the mathematics of elliptic curves and to stimulate
+further research at the intersection of algebraic number theory,
+geometry, and cryptography.</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <a href="/elliptic-curve/blog/" class="back-link">← Back to Blog</a>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Elliptic Curve Lab. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
