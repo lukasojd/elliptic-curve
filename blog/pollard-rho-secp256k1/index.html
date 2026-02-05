@@ -59,7 +59,8 @@ properly chosen curves.</p>
 <p>Pollard’s rho algorithm is one of the most efficient known methods
 for solving ECDLP, with expected running time of <span
 class="math inline">\(O(\sqrt{n})\)</span> where <span
-class="math inline">\(n\)</span> is the order of the group.</p>
+class="math inline">\(n = \#E(\mathbb{F}_p)\)</span> is the order of the
+group.</p>
 <h1 id="the-algorithm">The Algorithm</h1>
 <p>Pollard’s rho uses a pseudo-random walk on the elliptic curve group.
 We define a partition of the group into <span
@@ -75,9 +76,10 @@ have: <span class="math display">\[a_i P + b_i Q = a_j P + b_j
 Q\]</span></p>
 <p>This yields: <span class="math display">\[(a_i - a_j)P = (b_j - b_i)Q
 = (b_j - b_i)kP\]</span></p>
-<p>If <span class="math inline">\(\gcd(b_j - b_i, n) = 1\)</span>, we
-can compute: <span class="math display">\[k = (a_i - a_j)(b_j -
-b_i)^{-1} \mod n\]</span></p>
+<p>If <span class="math inline">\(\gcd(b_j - b_i, n) = 1\)</span>, where
+<span class="math inline">\(n\)</span> is the group order, we can
+compute: <span class="math display">\[k = (a_i - a_j)(b_j - b_i)^{-1}
+\mod n\]</span></p>
 <h1 id="exploiting-the-automorphism-group">Exploiting the Automorphism
 Group</h1>
 <p>For curves with <span class="math inline">\(j\)</span>-invariant 0,
@@ -91,20 +93,28 @@ class="math inline">\((x, y)\)</span> is on the curve, so are:</p>
 <li><p><span class="math inline">\((\omega^2 x, -y)\)</span></p></li>
 </ul>
 <p>where <span class="math inline">\(\omega\)</span> is a primitive cube
-root of unity satisfying <span class="math inline">\(\omega^3 =
-1\)</span>.</p>
-<p>By detecting collisions up to automorphism, we reduce the expected
-number of iterations by a factor of <span class="math inline">\(\sqrt{6}
-\approx 2.45\)</span>.</p>
+root of unity in <span class="math inline">\(\mathbb{F}_p\)</span>,
+i.e., <span class="math inline">\(\omega^3 = 1\)</span> and <span
+class="math inline">\(\omega \neq 1\)</span>.</p>
+<p>By detecting collisions up to automorphism, we heuristically reduce
+the expected number of iterations by a factor of <span
+class="math inline">\(\sqrt{6} \approx 2.45\)</span>, assuming the
+random walk behaves like a uniform random process on the quotient
+group.</p>
 <h1 id="implementation-considerations">Implementation
 Considerations</h1>
-<h2 id="montgomery-ladder">Montgomery Ladder</h2>
-<p>For efficient scalar multiplication in the random walk, we use
-Montgomery’s ladder with projective coordinates. The differential
-addition formula requires only: <span class="math display">\[4M +
-2S\]</span> operations per step, where <span
+<h2 id="montgomery-xz-coordinates">Montgomery XZ Coordinates</h2>
+<p>For efficient group operations in the random walk, we use Montgomery
+XZ coordinates and differential addition formulas. A single differential
+addition step costs approximately: <span class="math display">\[4M +
+2S\]</span> in the base field, where <span
 class="math inline">\(M\)</span> denotes multiplication and <span
-class="math inline">\(S\)</span> denotes squaring in the base field.</p>
+class="math inline">\(S\)</span> denotes squaring.</p>
+<p>This representation allows computing <span class="math inline">\(x(P
++ Q)\)</span> given <span class="math inline">\(x(P)\)</span>, <span
+class="math inline">\(x(Q)\)</span>, and <span class="math inline">\(x(P
+- Q)\)</span>, without needing the <span
+class="math inline">\(y\)</span>-coordinates.</p>
 <h2 id="distinguished-points">Distinguished Points</h2>
 <p>To detect collisions efficiently in a distributed setting, we use
 distinguished points. A point <span class="math inline">\(R = (x,

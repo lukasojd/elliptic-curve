@@ -423,6 +423,18 @@ mjx-container {
     overflow-y: hidden;
 }
 
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text-muted);
+    margin-left: 0.5rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .site-header .container {
