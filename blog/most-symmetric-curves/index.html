@@ -259,12 +259,12 @@ than 6 symmetries (automorphisms fixing the identity).</p>
 Explicitly?</h1>
 <p>For a curve with <span class="math inline">\(j = 0\)</span>, we can
 write it as <span class="math inline">\(E: y^2 = x^3 + 1\)</span> (after
-a change of coordinates). The six symmetries are:</p>
+a change of coordinates). The six automorphisms are:</p>
 <div class="center">
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Symmetry</th>
+<th style="text-align: left;">Automorphism</th>
 <th style="text-align: left;">Formula</th>
 </tr>
 </thead>
@@ -275,48 +275,55 @@ a change of coordinates). The six symmetries are:</p>
 (x, y)\)</span></td>
 </tr>
 <tr>
-<td style="text-align: left;">Reflection</td>
+<td style="text-align: left;">Negation</td>
 <td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
 (x, -y)\)</span></td>
 </tr>
 <tr>
-<td style="text-align: left;">Rotation <span
-class="math inline">\(60°\)</span></td>
+<td style="text-align: left;">Rotation by <span
+class="math inline">\(\omega\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
+(\omega x, y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;">Rotation by <span
+class="math inline">\(\omega\)</span> + negation</td>
 <td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
 (\omega x, -y)\)</span></td>
 </tr>
 <tr>
-<td style="text-align: left;">Rotation <span
-class="math inline">\(120°\)</span></td>
+<td style="text-align: left;">Rotation by <span
+class="math inline">\(\omega^2\)</span></td>
 <td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
 (\omega^2 x, y)\)</span></td>
 </tr>
 <tr>
-<td style="text-align: left;">Rotation <span
-class="math inline">\(180°\)</span></td>
+<td style="text-align: left;">Rotation by <span
+class="math inline">\(\omega^2\)</span> + negation</td>
 <td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
-(x, -y)\)</span></td>
-</tr>
-<tr>
-<td style="text-align: left;">Rotation <span
-class="math inline">\(240°\)</span></td>
-<td style="text-align: left;"><span class="math inline">\((x, y) \mapsto
-(\omega x, y)\)</span></td>
+(\omega^2 x, -y)\)</span></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>where <span class="math inline">\(\omega = e^{2\pi i/3} = (-1 +
-i\sqrt{3})/2\)</span> is a primitive cube root of unity.</p>
+<p>where <span class="math inline">\(\omega = e^{2\pi i/3}\)</span> is a
+primitive cube root of unity.</p>
+<p><strong>Note:</strong> The map <span class="math inline">\((x, y)
+\mapsto (x, -y)\)</span> is both the “negation” in the elliptic curve
+group law (<span class="math inline">\(P \mapsto -P\)</span>) and
+corresponds to a <span class="math inline">\(180°\)</span> rotation on
+the complex torus.</p>
 <p>The general formula is <span class="math inline">\((x, y) \mapsto
 (\zeta^2 x, \zeta^3 y)\)</span> for each 6th root of unity <span
-class="math inline">\(\zeta\)</span>.</p>
+class="math inline">\(\zeta \in \{1, -1, \omega, -\omega, \omega^2,
+-\omega^2\}\)</span>.</p>
 <h1 id="why-does-this-matter-for-cryptography">Why Does This Matter for
 Cryptography?</h1>
 <p>Bitcoin’s secp256k1 curve has <span class="math inline">\(j =
-0\)</span>. This isn’t just a coincidence—it was chosen partly because
-the extra structure makes certain operations faster (the GLV method for
-scalar multiplication).</p>
+0\)</span>. This extra structure allows faster scalar multiplication via
+the GLV method, and is one of the reasons why <span
+class="math inline">\(j = 0\)</span> curves are attractive in
+cryptography.</p>
 <p>But there’s another implication: <strong>Pollard’s rho
 algorithm</strong>.</p>
 <p>When solving the discrete logarithm problem on an elliptic curve,
