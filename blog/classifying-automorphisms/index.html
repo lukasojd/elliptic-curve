@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifying Automorphisms of Elliptic Curves in Characteristic > 3 | Elliptic Curve Lab</title>
+    <meta name="description" content="How symmetric can an elliptic curve be? This seemingly simple question has a surprisingly clean answer that lies at the heart of elliptic curve theory:...">
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Elliptic Curve Lab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lukasojd.github.io/elliptic-curve/blog/classifying-automorphisms/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lukasojd.github.io/elliptic-curve/blog/classifying-automorphisms/">
+    <meta property="og:title" content="Classifying Automorphisms of Elliptic Curves in Characteristic > 3 | Elliptic Curve Lab">
+    <meta property="og:description" content="How symmetric can an elliptic curve be? This seemingly simple question has a surprisingly clean answer that lies at the heart of elliptic curve theory:...">
+    <meta property="og:site_name" content="Elliptic Curve Lab">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Classifying Automorphisms of Elliptic Curves in Characteristic > 3 | Elliptic Curve Lab">
+    <meta name="twitter:description" content="How symmetric can an elliptic curve be? This seemingly simple question has a surprisingly clean answer that lies at the heart of elliptic curve theory:...">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="color-scheme" content="dark">
+
+
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        :root{--color-bg:#0d1117;--color-bg-secondary:#161b22;--color-text:#c9d1d9;--color-text-muted:#8b949e;--color-accent:#58a6ff;--color-border:#30363d;--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--max-width:900px;--spacing:1.5rem}.skip-link{position:absolute;top:-100px;opacity:0;pointer-events:none}.skip-link:focus{top:0;opacity:1;pointer-events:auto}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;line-height:1.6}body{margin:0;padding:0;font-family:var(--font-sans);background-color:var(--color-bg);color:var(--color-text)}.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing)}.site-header{background-color:var(--color-bg-secondary);border-bottom:1px solid var(--color-border);padding:1rem 0;position:sticky;top:0;z-index:100}.site-header .container{display:flex;justify-content:space-between;align-items:center}.site-logo{display:flex;align-items:center;text-decoration:none;color:var(--color-text);font-weight:600;font-size:1.2rem}.logo-symbol{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;background:linear-gradient(135deg,var(--color-accent),#a855f7);border-radius:6px;margin-right:.75rem;font-weight:700;color:#fff}.main-nav{display:flex;gap:1.5rem}.main-nav a{color:var(--color-text-muted);text-decoration:none;font-size:.95rem}.site-main{padding:3rem 0;min-height:calc(100vh - 200px)}
+    </style>
+
+    <!-- Preload main stylesheet (versioned for cache) -->
+    <link rel="preload" href="/elliptic-curve/assets/css/style.css?v=1.0" as="style">
+    <link rel="stylesheet" href="/elliptic-curve/assets/css/style.css?v=1.0">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Elliptic Curve Lab",
+        "url": "https://lukasojd.github.io/elliptic-curve/",
+        "description": "Research project exploring the mathematical foundations of ECDLP",
+        "author": {
+            "@type": "Person",
+            "name": "L. Kriz"
+        }
+    }
+    </script>
+
+    <!-- MathJax for LaTeX rendering (deferred) -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="/elliptic-curve/assets/js/tex-svg.js"></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/elliptic-curve/" class="site-logo" aria-label="Elliptic Curve Lab Home">
+                <span class="logo-symbol" aria-hidden="true">E</span>
+                <span class="logo-text">Elliptic Curve Lab</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="/elliptic-curve/">Home</a>
+                <a href="/elliptic-curve/blog/">Blog</a>
+                <a href="/elliptic-curve/publications/">Publications</a>
+                <a href="/elliptic-curve/about/">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main" id="main-content">
+        <div class="container">
+            <article class="blog-post">
+    <header class="post-header">
+        <h1>Classifying Automorphisms of Elliptic Curves in Characteristic > 3</h1>
+        <div class="post-meta">
+            <time datetime="February 06, 2026">February 06, 2026</time>
+            <span class="tags">elliptic-curves, automorphisms, j-invariant, classification</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h1 id="introduction">Introduction</h1>
+<p>How symmetric can an elliptic curve be? This seemingly simple
+question has a surprisingly clean answer that lies at the heart of
+elliptic curve theory: <strong>in characteristic greater than 3, an
+elliptic curve can have at most 6 automorphisms fixing the
+identity</strong>, and this maximum is achieved precisely when the <span
+class="math inline">\(j\)</span>-invariant equals 0.</p>
+<p>This result isn’t just mathematically elegant—it has practical
+implications for cryptography. In Pollard’s rho algorithm for the
+Elliptic Curve Discrete Logarithm Problem (ECDLP), we can exploit
+automorphisms to speed up the search by a factor of <span
+class="math inline">\(\sqrt{|\mathrm{Aut}|}\)</span>. For curves with
+<span class="math inline">\(j = 0\)</span> (like Bitcoin’s secp256k1),
+this gives a <span class="math inline">\(\sqrt{6} \approx
+2.45\times\)</span> speedup—the best possible in characteristic <span
+class="math inline">\(&gt; 3\)</span>.</p>
+<p>In this post, we’ll walk through the classification step by step,
+explaining not just <em>what</em> the automorphism groups are, but
+<em>why</em> the classification works.</p>
+<h1 id="setting-the-stage">Setting the Stage</h1>
+<h2 id="what-is-an-automorphism">What Is an Automorphism?</h2>
+<p>Let <span class="math inline">\(E\)</span> be an elliptic curve over
+an algebraically closed field <span class="math inline">\(k\)</span>
+with characteristic greater than 3. We write the curve in <strong>short
+Weierstrass form</strong>: <span class="math display">\[E: y^2 = x^3 +
+ax + b, \quad \text{where } 4a^3 + 27b^2 \neq 0.\]</span></p>
+<p><strong>Definition.</strong> An <strong>automorphism</strong> of
+<span class="math inline">\(E\)</span> fixing the identity <span
+class="math inline">\(O\)</span> is an isomorphism <span
+class="math inline">\(\phi: E \to E\)</span> such that <span
+class="math inline">\(\phi(O) = O\)</span>.</p>
+<p>The set of all such automorphisms forms a group under composition,
+denoted <span class="math inline">\(\mathrm{Aut}(E, O)\)</span>.</p>
+<p><strong>Crucial point:</strong> We exclude translations <span
+class="math inline">\(\tau_P: Q \mapsto Q + P\)</span>. These exist for
+every point <span class="math inline">\(P \in E\)</span> and form an
+infinite group (isomorphic to <span class="math inline">\(E\)</span>
+itself). We only count automorphisms that <em>fix</em> the identity.</p>
+<h2 id="the-hyperelliptic-involution-a-universal-symmetry">The
+Hyperelliptic Involution: A Universal Symmetry</h2>
+<p>Every elliptic curve has at least one non-trivial automorphism: the
+<strong>hyperelliptic involution</strong> <span
+class="math display">\[\iota: (x, y) \mapsto (x, -y).\]</span> This map
+negates the <span class="math inline">\(y\)</span>-coordinate, which
+geometrically corresponds to reflecting the curve across the <span
+class="math inline">\(x\)</span>-axis. In the group law, <span
+class="math inline">\(\iota(P) = -P\)</span>.</p>
+<p>So <span class="math inline">\(|\mathrm{Aut}(E, O)| \geq 2\)</span>
+for every elliptic curve. The question is: can we have more?</p>
+<h2 id="the-j-invariant">The <span
+class="math inline">\(j\)</span>-Invariant</h2>
+<p>The <strong><span class="math inline">\(j\)</span>-invariant</strong>
+is defined as: <span class="math display">\[j(E) = 1728 \cdot
+\frac{4a^3}{4a^3 + 27b^2}.\]</span></p>
+<p>Two elliptic curves over an algebraically closed field are isomorphic
+if and only if they have the same <span
+class="math inline">\(j\)</span>-invariant. This makes <span
+class="math inline">\(j\)</span> a complete invariant for isomorphism
+classes.</p>
+<p><strong>Key observation:</strong></p>
+<ul>
+<li><p><span class="math inline">\(j = 0\)</span> if and only if <span
+class="math inline">\(a = 0\)</span> (so the curve has form <span
+class="math inline">\(y^2 = x^3 + b\)</span>).</p></li>
+<li><p><span class="math inline">\(j = 1728\)</span> if and only if
+<span class="math inline">\(b = 0\)</span> (so the curve has form <span
+class="math inline">\(y^2 = x^3 + ax\)</span>).</p></li>
+</ul>
+<p>These two special values turn out to be exactly where the
+automorphism group is larger than <span class="math inline">\(\{\pm
+1\}\)</span>.</p>
+<h1 id="the-classification-theorem">The Classification Theorem</h1>
+<div class="center">
+
+</div>
+<p>Let’s prove this for the most interesting case: <span
+class="math inline">\(j = 0\)</span>.</p>
+<h1 id="the-case-j-0-six-automorphisms">The Case <span
+class="math inline">\(j = 0\)</span>: Six Automorphisms</h1>
+<h2 id="reduction-to-standard-form">Reduction to Standard Form</h2>
+<p>Any curve with <span class="math inline">\(j = 0\)</span> has the
+form <span class="math inline">\(y^2 = x^3 + b\)</span> for some <span
+class="math inline">\(b \neq 0\)</span>. Moreover, by a change of
+variables <span class="math inline">\((x, y) \mapsto (u^2 x, u^3
+y)\)</span> with <span class="math inline">\(u^6 = b\)</span>, we can
+transform any such curve to the <strong>canonical form</strong>: <span
+class="math display">\[E_1: y^2 = x^3 + 1.\]</span></p>
+<p>So it suffices to find all automorphisms of <span
+class="math inline">\(E_1\)</span>.</p>
+<h2 id="constructing-the-automorphisms">Constructing the
+Automorphisms</h2>
+<p>Let <span class="math inline">\(\omega\)</span> be a primitive cube
+root of unity, so <span class="math inline">\(\omega^3 = 1\)</span> and
+<span class="math inline">\(\omega^2 + \omega + 1 = 0\)</span>.</p>
+<p>For any 6th root of unity <span class="math inline">\(\zeta\)</span>
+(i.e., <span class="math inline">\(\zeta^6 = 1\)</span>), define: <span
+class="math display">\[\phi_\zeta: (x, y) \mapsto (\zeta^2 x, \zeta^3
+y).\]</span></p>
+<p><strong>Claim:</strong> <span
+class="math inline">\(\phi_\zeta\)</span> is an automorphism of <span
+class="math inline">\(E_1\)</span>.</p>
+<p><strong>Proof:</strong> We verify that <span
+class="math inline">\((\zeta^2 x, \zeta^3 y)\)</span> lies on <span
+class="math inline">\(E_1\)</span> whenever <span
+class="math inline">\((x, y)\)</span> does: <span
+class="math display">\[\begin{align*}
+(\zeta^3 y)^2 &amp;= \zeta^6 y^2 = y^2 \quad \text{(since $\zeta^6 =
+1$)}, \\
+(\zeta^2 x)^3 + 1 &amp;= \zeta^6 x^3 + 1 = x^3 + 1 \quad \text{(since
+$\zeta^6 = 1$)}.
+\end{align*}\]</span> Since <span class="math inline">\(y^2 = x^3 +
+1\)</span>, both expressions equal <span class="math inline">\(x^3 +
+1\)</span>, so the image point is on the curve. <span
+class="math inline">\(\square\)</span></p>
+<h2 id="the-six-automorphisms-explicitly">The Six Automorphisms
+Explicitly</h2>
+<p>The six 6th roots of unity are <span class="math inline">\(\{1, -1,
+\omega, -\omega, \omega^2, -\omega^2\}\)</span>. Computing <span
+class="math inline">\(\zeta^2\)</span> and <span
+class="math inline">\(\zeta^3\)</span> for each:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span
+class="math inline">\(\zeta\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\zeta^2\)</span></th>
+<th style="text-align: center;"><span
+class="math inline">\(\zeta^3\)</span></th>
+<th style="text-align: left;"><span class="math inline">\(\phi_\zeta(x,
+y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((x,
+y)\)</span> — identity</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((x,
+-y)\)</span> — hyperelliptic involution</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\omega\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omega^2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((\omega^2 x,
+y)\)</span> — rotation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(-\omega\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omega^2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((\omega^2 x,
+-y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\omega^2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omega\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((\omega x,
+y)\)</span> — rotation</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(-\omega^2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omega\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(-1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((\omega x,
+-y)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Alternative notation:</strong> In the GLV method for fast
+scalar multiplication, these automorphisms are often written as <span
+class="math inline">\(\{\pm 1, \pm\lambda, \pm\lambda^2\}\)</span> where
+<span class="math inline">\(\lambda\)</span> is the eigenvalue
+satisfying <span class="math inline">\(\lambda^2 + \lambda + 1 \equiv 0
+\pmod{n}\)</span>.</p>
+<h2 id="proving-no-other-automorphisms-exist">Proving No Other
+Automorphisms Exist</h2>
+<p>Why are these the <em>only</em> automorphisms? The key is
+understanding what coordinate changes preserve the Weierstrass form.</p>
+<p><strong>General coordinate change:</strong> Any isomorphism <span
+class="math inline">\(E \to E&#39;\)</span> between curves in
+Weierstrass form has the shape: <span class="math display">\[(x, y)
+\mapsto (u^2 x + r, u^3 y + u^2 s x + t)\]</span> for some <span
+class="math inline">\(u \in k^\times\)</span> and <span
+class="math inline">\(r, s, t \in k\)</span>.</p>
+<p><strong>For an automorphism fixing <span
+class="math inline">\(O\)</span>:</strong> We need <span
+class="math inline">\(r = s = t = 0\)</span>. Here’s why:</p>
+<ul>
+<li><p>The point at infinity <span class="math inline">\(O =
+[0:1:0]\)</span> must map to itself. This forces <span
+class="math inline">\(r = t = 0\)</span> (after working in projective
+coordinates).</p></li>
+<li><p>To preserve the short Weierstrass form (no <span
+class="math inline">\(xy\)</span>, <span
+class="math inline">\(y\)</span>, or <span
+class="math inline">\(x^2\)</span> terms), we need <span
+class="math inline">\(s = 0\)</span>.</p></li>
+</ul>
+<p><strong>For <span class="math inline">\(E_1: y^2 = x^3 +
+1\)</span>:</strong> Substituting <span class="math inline">\((u^2 x,
+u^3 y)\)</span> into the equation: <span class="math display">\[(u^3
+y)^2 = (u^2 x)^3 + 1 \implies u^6 y^2 = u^6 x^3 + 1.\]</span> Comparing
+with <span class="math inline">\(y^2 = x^3 + 1\)</span>, we need <span
+class="math inline">\(u^6 = 1\)</span>.</p>
+<p>So the only automorphisms are <span
+class="math inline">\(\phi_\zeta\)</span> for <span
+class="math inline">\(\zeta^6 = 1\)</span>—exactly 6 of them.</p>
+<h1 id="the-case-j-1728-four-automorphisms">The Case <span
+class="math inline">\(j = 1728\)</span>: Four Automorphisms</h1>
+<p>For completeness, let’s see why <span class="math inline">\(j =
+1728\)</span> gives 4 automorphisms.</p>
+<p>A curve with <span class="math inline">\(j = 1728\)</span> has the
+form <span class="math inline">\(y^2 = x^3 + ax\)</span> with <span
+class="math inline">\(a \neq 0\)</span>. Scaling, we can assume <span
+class="math inline">\(E: y^2 = x^3 + x\)</span>.</p>
+<p><strong>Automorphisms:</strong> <span class="math inline">\((x, y)
+\mapsto (u^2 x, u^3 y)\)</span> where <span class="math inline">\(u^4 =
+1\)</span>.</p>
+<p><strong>Why <span class="math inline">\(u^4 = 1\)</span>?</strong>
+Substituting: <span class="math display">\[u^6 y^2 = u^6 x^3 + u^2 x
+\implies u^6(x^3 + x) = u^6 x^3 + u^2 x.\]</span> This requires <span
+class="math inline">\(u^6 = u^2\)</span>, hence <span
+class="math inline">\(u^4 = 1\)</span>.</p>
+<p>The four 4th roots of unity give automorphisms <span
+class="math inline">\(\{\mathrm{id}, \iota, (x,y) \mapsto (-x, iy),
+(x,y) \mapsto (-x, -iy)\}\)</span> where <span class="math inline">\(i^2
+= -1\)</span>.</p>
+<h1 id="the-generic-case-only-two-automorphisms">The Generic Case: Only
+Two Automorphisms</h1>
+<p>For <span class="math inline">\(j \neq 0, 1728\)</span>, both <span
+class="math inline">\(a\)</span> and <span
+class="math inline">\(b\)</span> are nonzero. A similar analysis shows
+that <span class="math inline">\(u^2 = 1\)</span> (from the <span
+class="math inline">\(x\)</span> coefficient) and <span
+class="math inline">\(u^6 = 1\)</span> (from the constant term), forcing
+<span class="math inline">\(u = \pm 1\)</span>.</p>
+<p>So generic curves have only the identity and hyperelliptic
+involution.</p>
+<h1 id="why-this-classification-is-exhaustive">Why This Classification
+Is Exhaustive</h1>
+<p>A natural question: could there be some “exotic” elliptic curve with
+more than 6 automorphisms that we haven’t discovered?</p>
+<p><strong>The answer is no</strong>, and here’s why the classification
+is complete:</p>
+<ol>
+<li><p><strong>Every elliptic curve has a <span
+class="math inline">\(j\)</span>-invariant.</strong> The <span
+class="math inline">\(j\)</span>-invariant is defined for any elliptic
+curve and takes a value in <span
+class="math inline">\(k\)</span>.</p></li>
+<li><p><strong>The <span class="math inline">\(j\)</span>-invariant
+determines the isomorphism class.</strong> Over an algebraically closed
+field, two curves are isomorphic iff they have the same <span
+class="math inline">\(j\)</span>.</p></li>
+<li><p><strong>Each <span class="math inline">\(j\)</span>-value gives a
+specific automorphism group.</strong> We’ve computed:</p>
+<ul>
+<li><p><span class="math inline">\(j \neq 0, 1728 \Rightarrow
+|\mathrm{Aut}| = 2\)</span></p></li>
+<li><p><span class="math inline">\(j = 1728 \Rightarrow |\mathrm{Aut}| =
+4\)</span></p></li>
+<li><p><span class="math inline">\(j = 0 \Rightarrow |\mathrm{Aut}| =
+6\)</span></p></li>
+</ul></li>
+</ol>
+<p><strong>There’s no room for exceptions.</strong> Every elliptic curve
+in characteristic <span class="math inline">\(&gt; 3\)</span>
+corresponds to some <span class="math inline">\(j \in k\)</span>, and
+every <span class="math inline">\(j\)</span> falls into one of three
+categories. This isn’t a list of “known examples”—it’s a structural
+theorem that applies to all curves, discovered or not.</p>
+<h1 id="what-about-characteristics-2-and-3">What About Characteristics 2
+and 3?</h1>
+<p>We’ve assumed <span class="math inline">\(\mathrm{char}(k) &gt;
+3\)</span> throughout. In characteristics 2 and 3, the situation is
+different:</p>
+<ul>
+<li><p><strong>Characteristic 2:</strong> <span
+class="math inline">\(|\mathrm{Aut}(E, O)| \in \{2, 4, 8, 24\}\)</span>.
+The curve <span class="math inline">\(y^2 + y = x^3\)</span> over <span
+class="math inline">\(\overline{\mathbb{F}_2}\)</span> has 24
+automorphisms.</p></li>
+<li><p><strong>Characteristic 3:</strong> <span
+class="math inline">\(|\mathrm{Aut}(E, O)| \in \{2, 4, 6, 12\}\)</span>.
+The curve <span class="math inline">\(y^2 = x^3 - x\)</span> over <span
+class="math inline">\(\overline{\mathbb{F}_3}\)</span> has 12
+automorphisms.</p></li>
+</ul>
+<p>This is why our main theorem explicitly excludes these
+characteristics. Cryptographic applications typically work in large
+prime characteristic anyway.</p>
+<h1 id="connection-to-complex-geometry">Connection to Complex
+Geometry</h1>
+<p>Over the complex numbers, elliptic curves are tori <span
+class="math inline">\(\mathbb{C}/\Lambda\)</span> for a lattice <span
+class="math inline">\(\Lambda\)</span>. The automorphisms fixing the
+identity correspond to complex numbers <span
+class="math inline">\(\alpha\)</span> with <span
+class="math inline">\(\alpha\Lambda = \Lambda\)</span>.</p>
+<ul>
+<li><p><strong>Generic lattice:</strong> Only <span
+class="math inline">\(\pm 1\)</span> preserve it. (<span
+class="math inline">\(|\mathrm{Aut}| = 2\)</span>)</p></li>
+<li><p><strong>Square lattice</strong> <span
+class="math inline">\(\Lambda = \mathbb{Z} + i\mathbb{Z}\)</span>: The
+4th roots of unity <span class="math inline">\(\{\pm 1, \pm i\}\)</span>
+preserve it. (<span class="math inline">\(j = 1728\)</span>, <span
+class="math inline">\(|\mathrm{Aut}| = 4\)</span>)</p></li>
+<li><p><strong>Hexagonal lattice</strong> <span
+class="math inline">\(\Lambda = \mathbb{Z} + \omega\mathbb{Z}\)</span>:
+The 6th roots of unity preserve it. (<span class="math inline">\(j =
+0\)</span>, <span class="math inline">\(|\mathrm{Aut}| =
+6\)</span>)</p></li>
+</ul>
+<p>This geometric picture explains why exactly 0 and 1728 are special:
+they correspond to the only lattices with extra rotational symmetry.</p>
+<h1 id="cryptographic-implications">Cryptographic Implications</h1>
+<p>For the Elliptic Curve Discrete Logarithm Problem:</p>
+<ul>
+<li><p><strong>Pollard’s rho:</strong> By detecting collisions up to
+automorphism, we reduce expected iterations by <span
+class="math inline">\(\sqrt{|\mathrm{Aut}|}\)</span>.</p></li>
+<li><p><strong>For secp256k1</strong> (<span class="math inline">\(j =
+0\)</span> over <span class="math inline">\(\mathbb{F}_p\)</span>): This
+gives a <span class="math inline">\(\sqrt{6} \approx 2.45\times\)</span>
+speedup—the maximum possible in characteristic <span
+class="math inline">\(&gt; 3\)</span>.</p></li>
+<li><p><strong>No free lunch:</strong> There’s no “secret” curve with
+<span class="math inline">\(|\mathrm{Aut}| &gt; 6\)</span> that would
+give a bigger speedup. The classification is complete.</p></li>
+</ul>
+<h1 id="summary">Summary</h1>
+<div class="center">
+
+</div>
+<p><strong>For full proofs and technical details</strong>, see the
+research notes in the Publications section.</p>
+<p>In the next post, we’ll explore how this classification of
+automorphisms directly determines the structure of
+<em>twists</em>—different “disguises” of the same curve over the same
+field.</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <a href="/elliptic-curve/blog/" class="back-link">← Back to Blog</a>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Elliptic Curve Lab. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

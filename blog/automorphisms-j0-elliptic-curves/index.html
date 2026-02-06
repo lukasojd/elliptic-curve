@@ -1,0 +1,2742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automorphisms of Elliptic Curves with j-Invariant Zero | Elliptic Curve Lab</title>
+    <meta name="description" content="The automorphism group of an elliptic curve plays a fundamental role in both the theoretical study of elliptic curves and their applications in...">
+
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="Elliptic Curve Lab">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lukasojd.github.io/elliptic-curve/blog/automorphisms-j0-elliptic-curves/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lukasojd.github.io/elliptic-curve/blog/automorphisms-j0-elliptic-curves/">
+    <meta property="og:title" content="Automorphisms of Elliptic Curves with j-Invariant Zero | Elliptic Curve Lab">
+    <meta property="og:description" content="The automorphism group of an elliptic curve plays a fundamental role in both the theoretical study of elliptic curves and their applications in...">
+    <meta property="og:site_name" content="Elliptic Curve Lab">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Automorphisms of Elliptic Curves with j-Invariant Zero | Elliptic Curve Lab">
+    <meta name="twitter:description" content="The automorphism group of an elliptic curve plays a fundamental role in both the theoretical study of elliptic curves and their applications in...">
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#0d1117">
+    <meta name="color-scheme" content="dark">
+
+
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        :root{--color-bg:#0d1117;--color-bg-secondary:#161b22;--color-text:#c9d1d9;--color-text-muted:#8b949e;--color-accent:#58a6ff;--color-border:#30363d;--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;--max-width:900px;--spacing:1.5rem}.skip-link{position:absolute;top:-100px;opacity:0;pointer-events:none}.skip-link:focus{top:0;opacity:1;pointer-events:auto}*,*::before,*::after{box-sizing:border-box}html{font-size:16px;line-height:1.6}body{margin:0;padding:0;font-family:var(--font-sans);background-color:var(--color-bg);color:var(--color-text)}.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--spacing)}.site-header{background-color:var(--color-bg-secondary);border-bottom:1px solid var(--color-border);padding:1rem 0;position:sticky;top:0;z-index:100}.site-header .container{display:flex;justify-content:space-between;align-items:center}.site-logo{display:flex;align-items:center;text-decoration:none;color:var(--color-text);font-weight:600;font-size:1.2rem}.logo-symbol{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;background:linear-gradient(135deg,var(--color-accent),#a855f7);border-radius:6px;margin-right:.75rem;font-weight:700;color:#fff}.main-nav{display:flex;gap:1.5rem}.main-nav a{color:var(--color-text-muted);text-decoration:none;font-size:.95rem}.site-main{padding:3rem 0;min-height:calc(100vh - 200px)}
+    </style>
+
+    <!-- Preload main stylesheet (versioned for cache) -->
+    <link rel="preload" href="/elliptic-curve/assets/css/style.css?v=1.0" as="style">
+    <link rel="stylesheet" href="/elliptic-curve/assets/css/style.css?v=1.0">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Elliptic Curve Lab",
+        "url": "https://lukasojd.github.io/elliptic-curve/",
+        "description": "Research project exploring the mathematical foundations of ECDLP",
+        "author": {
+            "@type": "Person",
+            "name": "L. Kriz"
+        }
+    }
+    </script>
+
+    <!-- MathJax for LaTeX rendering (deferred) -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            },
+            startup: {
+                ready: () => {
+                    MathJax.startup.defaultReady();
+                }
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="/elliptic-curve/assets/js/tex-svg.js"></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/elliptic-curve/" class="site-logo" aria-label="Elliptic Curve Lab Home">
+                <span class="logo-symbol" aria-hidden="true">E</span>
+                <span class="logo-text">Elliptic Curve Lab</span>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="/elliptic-curve/">Home</a>
+                <a href="/elliptic-curve/blog/">Blog</a>
+                <a href="/elliptic-curve/publications/">Publications</a>
+                <a href="/elliptic-curve/about/">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main" id="main-content">
+        <div class="container">
+            <article class="blog-post">
+    <header class="post-header">
+        <h1>Automorphisms of Elliptic Curves with j-Invariant Zero</h1>
+        <div class="post-meta">
+            <time datetime="February 06, 2026">February 06, 2026</time>
+            <span class="tags">elliptic-curves, automorphisms, j-invariant, algebraic-geometry</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        <h1 id="introduction-and-setting">Introduction and Setting</h1>
+<h2 id="motivation">Motivation</h2>
+<p>The automorphism group of an elliptic curve plays a fundamental role
+in both the theoretical study of elliptic curves and their applications
+in cryptography. In the context of the Elliptic Curve Discrete Logarithm
+Problem (ECDLP), Pollard’s rho algorithm can exploit the automorphism
+group to reduce the expected number of iterations by a factor of <span
+class="math inline">\(\sqrt{|\operatorname{Aut}(E, O)|}\)</span>. This
+makes curves with larger automorphism groups particularly interesting
+for cryptanalysis.</p>
+<p>The curve secp256k1, widely used in Bitcoin and other
+cryptocurrencies, has <span class="math inline">\(j\)</span>-invariant
+equal to 0. A natural question arises: <em>Is there an elliptic curve
+with a larger automorphism group that could provide an even greater
+speedup?</em> This document provides a rigorous negative answer for
+characteristic <span class="math inline">\(&gt; 3\)</span>.</p>
+<h2 id="the-field-k">The Field <span
+class="math inline">\(k\)</span></h2>
+<p>Throughout this document, we work over an <strong>algebraically
+closed field</strong> <span class="math inline">\(k = \bar{k}\)</span>
+with <span class="math inline">\(\operatorname{char}(k) &gt;
+3\)</span>.</p>
+<div class="definition">
+<p><strong>Definition 1</strong>. A field <span
+class="math inline">\(k\)</span> is <strong>algebraically
+closed</strong> if every non-constant polynomial <span
+class="math inline">\(f(x) \in k[x]\)</span> has a root in <span
+class="math inline">\(k\)</span>. Equivalently, every polynomial over
+<span class="math inline">\(k\)</span> splits completely into linear
+factors.</p>
+</div>
+<div class="example">
+<p><strong>Example 2</strong>. The following are algebraically closed
+fields:</p>
+<ul>
+<li><p>The complex numbers <span
+class="math inline">\(\mathbb{C}\)</span>.</p></li>
+<li><p>The algebraic closure <span
+class="math inline">\(\overline{\mathbb{Q}}\)</span> of the
+rationals.</p></li>
+<li><p>The algebraic closure <span
+class="math inline">\(\overline{\mathbb{F}_p}\)</span> of any finite
+field <span class="math inline">\(\mathbb{F}_p\)</span>.</p></li>
+</ul>
+<p>The following are <em>not</em> algebraically closed:</p>
+<ul>
+<li><p>The real numbers <span class="math inline">\(\mathbb{R}\)</span>
+(since <span class="math inline">\(x^2 + 1\)</span> has no real
+root).</p></li>
+<li><p>Any finite field <span
+class="math inline">\(\mathbb{F}_p\)</span> (since <span
+class="math inline">\(x^p - x - 1\)</span> has no root in <span
+class="math inline">\(\mathbb{F}_p\)</span>).</p></li>
+<li><p>The rationals <span
+class="math inline">\(\mathbb{Q}\)</span>.</p></li>
+</ul>
+</div>
+<div class="remark">
+<p><strong>Remark 3</strong> (Why algebraic closure?). When studying
+elliptic curves over a non-algebraically closed field <span
+class="math inline">\(K\)</span> (such as <span
+class="math inline">\(\mathbb{F}_p\)</span> or <span
+class="math inline">\(\mathbb{Q}\)</span>), the automorphism group <span
+class="math inline">\(\operatorname{Aut}(E_K, O)\)</span> defined over
+<span class="math inline">\(K\)</span> may be strictly smaller than
+<span class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O)\)</span>.
+For instance, an automorphism might require a cube root of unity that
+doesn’t exist in <span class="math inline">\(K\)</span>. Working over
+<span class="math inline">\(\bar{k}\)</span> ensures we capture all
+<em>geometric</em> automorphisms.</p>
+<p><strong>Example:</strong> Consider <span class="math inline">\(E: y^2
+= x^3 + 1\)</span> over <span
+class="math inline">\(\mathbb{F}_5\)</span>. Since <span
+class="math inline">\(5 \equiv 2 \pmod{3}\)</span>, the field <span
+class="math inline">\(\mathbb{F}_5\)</span> contains no primitive cube
+root of unity. Over <span class="math inline">\(\mathbb{F}_5\)</span>,
+we have <span
+class="math inline">\(|\operatorname{Aut}(E_{\mathbb{F}_5}, O)| =
+2\)</span>. However, over <span
+class="math inline">\(\overline{\mathbb{F}_5}\)</span>, we have <span
+class="math inline">\(|\operatorname{Aut}(E_{\overline{\mathbb{F}_5}},
+O)| = 6\)</span>.</p>
+</div>
+<div class="remark">
+<p><strong>Remark 4</strong> (Characteristic assumption). The assumption
+<span class="math inline">\(\operatorname{char}(k) &gt; 3\)</span> is
+essential. In characteristics 2 and 3, the theory of elliptic curves
+requires different Weierstrass forms, and supersingular curves can have
+larger automorphism groups (up to 24 in characteristic 2, up to 12 in
+characteristic 3). We explicitly exclude these cases.</p>
+</div>
+<h2 id="definition-of-operatornameaute_bark-o">Definition of <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O)\)</span></h2>
+<div class="definition">
+<p><strong>Definition 5</strong>. Let <span
+class="math inline">\(E\)</span> be an elliptic curve over <span
+class="math inline">\(k\)</span> with identity element <span
+class="math inline">\(O\)</span>. The <strong>automorphism
+group</strong> <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O)\)</span>
+consists of all isomorphisms <span class="math inline">\(\phi: E \to
+E\)</span> (as algebraic varieties over <span
+class="math inline">\(\bar{k}\)</span>) such that <span
+class="math inline">\(\phi(O) = O\)</span>.</p>
+</div>
+<div class="remark">
+<p><strong>Remark 6</strong> (Crucial distinction). We explicitly
+exclude translations. An elliptic curve <span
+class="math inline">\(E\)</span> has infinitely many automorphisms as an
+algebraic variety: translating by any point <span
+class="math inline">\(P \in E\)</span> gives an automorphism <span
+class="math inline">\(\tau_P: Q \mapsto Q + P\)</span>. These form a
+group isomorphic to <span class="math inline">\(E\)</span> itself (as an
+abstract group).</p>
+<p>However, the group <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O)\)</span>
+consists only of those automorphisms <strong>fixing the identity
+element</strong> <span class="math inline">\(O\)</span>. This is a
+finite group, and its structure depends only on the <span
+class="math inline">\(j\)</span>-invariant of the curve.</p>
+</div>
+<div id="prop:aut-is-group-aut" class="proposition">
+<p><strong>Proposition 7</strong>. <em>For an elliptic curve <span
+class="math inline">\(E\)</span> with identity <span
+class="math inline">\(O\)</span>, we have: <span
+class="math display">\[\operatorname{Aut}(E_{\bar{k}}, O) = \{\phi: E
+\xrightarrow{\sim} E \mid \phi \text{ is a group
+homomorphism}\}.\]</span> That is, automorphisms fixing <span
+class="math inline">\(O\)</span> are precisely the group automorphisms
+of <span class="math inline">\((E, +)\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <span class="math inline">\((\supseteq)\)</span> Any
+group isomorphism necessarily fixes the identity element.</p>
+<p><span class="math inline">\((\subseteq)\)</span> Let <span
+class="math inline">\(\phi \in \operatorname{Aut}(E_{\bar{k}},
+O)\)</span>. We must show <span class="math inline">\(\phi(P + Q) =
+\phi(P) + \phi(Q)\)</span> for all <span class="math inline">\(P, Q \in
+E\)</span>.</p>
+<p>The group law on an elliptic curve is defined geometrically: <span
+class="math inline">\(P + Q + R = O\)</span> if and only if <span
+class="math inline">\(P\)</span>, <span
+class="math inline">\(Q\)</span>, <span class="math inline">\(R\)</span>
+are collinear (counting multiplicities, with <span
+class="math inline">\(O\)</span> being the point at infinity).</p>
+<p>Since <span class="math inline">\(\phi\)</span> is an isomorphism of
+algebraic varieties, it preserves collinearity: three points are
+collinear if and only if their images are collinear. Moreover, <span
+class="math inline">\(\phi(O) = O\)</span>.</p>
+<p>Thus if <span class="math inline">\(P + Q + R = O\)</span>, then
+<span class="math inline">\(\phi(P)\)</span>, <span
+class="math inline">\(\phi(Q)\)</span>, <span
+class="math inline">\(\phi(R)\)</span> are collinear and <span
+class="math inline">\(\phi(R) = O\)</span> when <span
+class="math inline">\(R = O\)</span>, giving <span
+class="math inline">\(\phi(P) + \phi(Q) + \phi(R) = O\)</span>. This
+shows <span class="math inline">\(\phi\)</span> is a group
+homomorphism. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 8</strong>. The proposition shows that our purely
+geometric definition (isomorphisms fixing <span
+class="math inline">\(O\)</span>) coincides with the purely algebraic
+definition (group automorphisms). This justifies using whichever
+perspective is more convenient.</p>
+</div>
+<h2 id="short-weierstrass-form">Short Weierstrass Form</h2>
+<p>Since <span class="math inline">\(\operatorname{char}(k) &gt;
+3\)</span>, every elliptic curve <span class="math inline">\(E\)</span>
+over <span class="math inline">\(k\)</span> can be written in
+<strong>short Weierstrass form</strong>: <span
+class="math display">\[\begin{equation}
+\label{eq:weierstrass}
+E: y^2 = x^3 + ax + b, \quad \text{where } a, b \in k.
+\end{equation}\]</span></p>
+<p>This is achieved by completing the square in <span
+class="math inline">\(y\)</span> and the cube in <span
+class="math inline">\(x\)</span>, operations that require dividing by 2
+and 3 respectively (hence the characteristic assumption).</p>
+<div class="definition">
+<p><strong>Definition 9</strong>. The <strong>discriminant</strong> of
+the curve <span class="math inline">\(E: y^2 = x^3 + ax + b\)</span> is
+<span class="math display">\[\Delta = -16(4a^3 + 27b^2).\]</span></p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 10</strong>. <em>The curve <span
+class="math inline">\(E: y^2 = x^3 + ax + b\)</span> is non-singular
+(i.e., is an elliptic curve) if and only if <span
+class="math inline">\(\Delta \neq 0\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> We prove both directions explicitly.</p>
+<p><strong>(<span class="math inline">\(\Rightarrow\)</span>) Singular
+implies <span class="math inline">\(\Delta = 0\)</span>:</strong> The
+curve is singular if and only if there exists a point <span
+class="math inline">\((x_0, y_0)\)</span> where both the curve equation
+and its partial derivatives vanish: <span
+class="math display">\[\begin{align*}
+y_0^2 &amp;= x_0^3 + ax_0 + b, \\
+\frac{\partial}{\partial x}(y^2 - x^3 - ax - b)\big|_{(x_0,y_0)} &amp;=
+-3x_0^2 - a = 0, \\
+\frac{\partial}{\partial y}(y^2 - x^3 - ax - b)\big|_{(x_0,y_0)} &amp;=
+2y_0 = 0.
+\end{align*}\]</span></p>
+<p>From the second and third equations: <span class="math inline">\(y_0
+= 0\)</span> and <span class="math inline">\(x_0^2 = -a/3\)</span>.
+Substituting into the first: <span class="math display">\[0 = x_0^3 +
+ax_0 + b = x_0(x_0^2 + a) + b = x_0\left(-\frac{a}{3} + a\right) + b =
+\frac{2a}{3}x_0 + b.\]</span></p>
+<p>Thus <span class="math inline">\(x_0 = -3b/(2a)\)</span> (assuming
+<span class="math inline">\(a \neq 0\)</span>). Substituting back into
+<span class="math inline">\(x_0^2 = -a/3\)</span>: <span
+class="math display">\[\frac{9b^2}{4a^2} = -\frac{a}{3} \implies 27b^2 =
+-4a^3 \implies 4a^3 + 27b^2 = 0.\]</span></p>
+<p>The case <span class="math inline">\(a = 0\)</span> gives <span
+class="math inline">\(x_0^2 = 0\)</span>, so <span
+class="math inline">\(x_0 = 0\)</span>, and then <span
+class="math inline">\(b = 0\)</span>, again yielding <span
+class="math inline">\(4a^3 + 27b^2 = 0\)</span>.</p>
+<p><strong>(<span class="math inline">\(\Leftarrow\)</span>) <span
+class="math inline">\(\Delta = 0\)</span> implies singular:</strong>
+Suppose <span class="math inline">\(4a^3 + 27b^2 = 0\)</span>. We
+construct a singular point.</p>
+<p><em>Case <span class="math inline">\(a \neq 0\)</span>:</em> Set
+<span class="math inline">\(x_0 = -3b/(2a)\)</span> and <span
+class="math inline">\(y_0 = 0\)</span>. Then <span
+class="math inline">\(x_0^2 = 9b^2/(4a^2) = -a/3\)</span> (using <span
+class="math inline">\(27b^2 = -4a^3\)</span>), so <span
+class="math inline">\(-3x_0^2 - a = -3(-a/3) - a = 0\)</span>. Also
+<span class="math inline">\(x_0^3 + ax_0 + b = x_0(x_0^2 + a) + b =
+x_0(2a/3) + b = -b + b = 0\)</span>. Thus <span
+class="math inline">\((x_0, 0)\)</span> is a singular point.</p>
+<p><em>Case <span class="math inline">\(a = 0\)</span>:</em> Then <span
+class="math inline">\(27b^2 = 0\)</span>, so <span
+class="math inline">\(b = 0\)</span>. The curve <span
+class="math inline">\(y^2 = x^3\)</span> has a cusp at <span
+class="math inline">\((0, 0)\)</span>. ◻</p>
+</div>
+<h2 id="the-j-invariant">The <span
+class="math inline">\(j\)</span>-Invariant</h2>
+<div class="definition">
+<p><strong>Definition 11</strong>. The <strong><span
+class="math inline">\(j\)</span>-invariant</strong> of the elliptic
+curve <span class="math inline">\(E: y^2 = x^3 + ax + b\)</span> is
+<span class="math display">\[\begin{equation}
+\label{eq:j-invariant}
+j(E) = 1728 \cdot \frac{4a^3}{4a^3 + 27b^2} = 1728 \cdot
+\frac{4a^3}{-\Delta/16} = -1728 \cdot \frac{64a^3}{\Delta}.
+\end{equation}\]</span></p>
+</div>
+<div class="remark">
+<p><strong>Remark 12</strong>. The factor 1728 = <span
+class="math inline">\(12^3\)</span> = <span
+class="math inline">\(1728\)</span> is chosen so that <span
+class="math inline">\(j = 1728\)</span> when <span
+class="math inline">\(b = 0\)</span> (and <span class="math inline">\(a
+\neq 0\)</span>). The number 1728 also has the property that <span
+class="math inline">\(1728 = 1728 \cdot 1\)</span> in any field of
+characteristic <span class="math inline">\(&gt; 3\)</span>.</p>
+</div>
+<p>The fundamental property of the <span
+class="math inline">\(j\)</span>-invariant is:</p>
+<div id="thm:j-classification" class="theorem">
+<p><strong>Theorem 13</strong> (Classification by <span
+class="math inline">\(j\)</span>-invariant). <em>Two elliptic curves
+<span class="math inline">\(E_1\)</span> and <span
+class="math inline">\(E_2\)</span> over an algebraically closed field
+<span class="math inline">\(k\)</span> are isomorphic (over <span
+class="math inline">\(k\)</span>) if and only if <span
+class="math inline">\(j(E_1) = j(E_2)\)</span>. Moreover, for every
+<span class="math inline">\(j_0 \in k\)</span>, there exists an elliptic
+curve <span class="math inline">\(E\)</span> with <span
+class="math inline">\(j(E) = j_0\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof sketch.</em> For the “only if” direction: one shows that
+<span class="math inline">\(j\)</span> is invariant under the admissible
+coordinate changes. For the “if” direction: one explicitly constructs
+curves with any given <span class="math inline">\(j\)</span>-invariant.
+For <span class="math inline">\(j_0 \neq 0, 1728\)</span>, one can take
+<span class="math inline">\(E: y^2 = x^3 - \frac{27j_0}{4(j_0 - 1728)}x
++ \frac{27j_0}{4(j_0 - 1728)}\)</span>. For <span
+class="math inline">\(j_0 = 0\)</span>, take <span
+class="math inline">\(y^2 = x^3 + 1\)</span>. For <span
+class="math inline">\(j_0 = 1728\)</span>, take <span
+class="math inline">\(y^2 = x^3 + x\)</span>.</p>
+<p>See <span class="citation" data-cites="silverman"></span> for the
+complete proof. ◻</p>
+</div>
+<h1 id="the-canonical-model-for-j-0">The Canonical Model for <span
+class="math inline">\(j = 0\)</span></h1>
+<h2 id="characterization-of-j-0">Characterization of <span
+class="math inline">\(j = 0\)</span></h2>
+<div id="prop:j0-iff-a0" class="proposition">
+<p><strong>Proposition 14</strong>. <em>Let <span
+class="math inline">\(E: y^2 = x^3 + ax + b\)</span> be an elliptic
+curve over <span class="math inline">\(k\)</span> with <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>. Then <span
+class="math display">\[j(E) = 0 \iff a = 0.\]</span></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> From the definition <a href="#eq:j-invariant"
+data-reference-type="eqref"
+data-reference="eq:j-invariant">[eq:j-invariant]</a>: <span
+class="math display">\[j(E) = 1728 \cdot \frac{4a^3}{4a^3 +
+27b^2}.\]</span></p>
+<p><strong>(<span class="math inline">\(\Rightarrow\)</span>)</strong>
+Suppose <span class="math inline">\(j(E) = 0\)</span>. Then the
+numerator must vanish: <span class="math inline">\(4a^3 =
+0\)</span>.</p>
+<p>Since <span class="math inline">\(\operatorname{char}(k) &gt;
+3\)</span>, the factor 4 is a unit in <span
+class="math inline">\(k\)</span> (it’s invertible). Thus <span
+class="math inline">\(a^3 = 0\)</span>.</p>
+<p>Since <span class="math inline">\(k\)</span> is a field (hence an
+integral domain with no nilpotents), <span class="math inline">\(a^3 =
+0\)</span> implies <span class="math inline">\(a = 0\)</span>.</p>
+<p><strong>(<span class="math inline">\(\Leftarrow\)</span>)</strong>
+Suppose <span class="math inline">\(a = 0\)</span>. Then <span
+class="math inline">\(4a^3 = 0\)</span>, so the numerator of <span
+class="math inline">\(j(E)\)</span> is zero.</p>
+<p>We must verify the denominator is non-zero: <span
+class="math inline">\(4a^3 + 27b^2 = 27b^2\)</span>. Since <span
+class="math inline">\(E\)</span> is an elliptic curve, <span
+class="math inline">\(\Delta = -16(4a^3 + 27b^2) = -16(27b^2) \neq
+0\)</span>. This requires <span class="math inline">\(b^2 \neq
+0\)</span>, hence <span class="math inline">\(b \neq 0\)</span>.</p>
+<p>Thus the denominator <span class="math inline">\(27b^2 \neq
+0\)</span>, and <span class="math inline">\(j(E) = 1728 \cdot 0 / 27b^2
+= 0\)</span>. ◻</p>
+</div>
+<div id="cor:j0-form" class="corollary">
+<p><strong>Corollary 15</strong>. <em>Every elliptic curve <span
+class="math inline">\(E\)</span> with <span class="math inline">\(j(E) =
+0\)</span> over <span class="math inline">\(k\)</span> (with <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>) has the
+form <span class="math display">\[E_b: y^2 = x^3 + b\]</span> for some
+<span class="math inline">\(b \neq 0\)</span> in <span
+class="math inline">\(k\)</span>.</em></p>
+</div>
+<h2 id="scaling-argument-reduction-to-e_1">Scaling Argument: Reduction
+to <span class="math inline">\(E_1\)</span></h2>
+<p>Different values of <span class="math inline">\(b\)</span> give
+different curve equations, but they are all isomorphic over <span
+class="math inline">\(\bar{k}\)</span>.</p>
+<div id="lem:scaling" class="lemma">
+<p><strong>Lemma 16</strong>. <em>All curves <span
+class="math inline">\(E_b: y^2 = x^3 + b\)</span> with <span
+class="math inline">\(b \neq 0\)</span> are isomorphic over <span
+class="math inline">\(\bar{k}\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> Consider the change of variables <span
+class="math display">\[\phi: (x, y) \mapsto (u^2 x, u^3 y)\]</span> for
+some <span class="math inline">\(u \in \bar{k}^\times\)</span>. We
+compute how this transformation affects the curve equation.</p>
+<p><strong>Step 1: Effect on coordinates.</strong> If <span
+class="math inline">\((x&#39;, y&#39;) = (u^2 x, u^3 y)\)</span>, then
+the inverse transformation is <span class="math inline">\((x, y) =
+(u^{-2} x&#39;, u^{-3} y&#39;)\)</span>.</p>
+<p><strong>Step 2: Transformed curve equation.</strong> Substituting
+into <span class="math inline">\(y^2 = x^3 + b\)</span>: <span
+class="math display">\[\begin{align*}
+(u^{-3} y&#39;)^2 &amp;= (u^{-2} x&#39;)^3 + b \\
+u^{-6} y&#39;^2 &amp;= u^{-6} x&#39;^3 + b \\
+y&#39;^2 &amp;= x&#39;^3 + u^6 b.
+\end{align*}\]</span></p>
+<p>Thus the transformation maps <span class="math inline">\(E_b\)</span>
+to <span class="math inline">\(E_{u^6 b}\)</span>.</p>
+<p><strong>Step 3: Choosing <span
+class="math inline">\(u\)</span>.</strong> Given <span
+class="math inline">\(b \neq 0\)</span>, we want to find <span
+class="math inline">\(u\)</span> such that <span
+class="math inline">\(u^6 b = 1\)</span>, i.e., <span
+class="math inline">\(u^6 = b^{-1}\)</span>.</p>
+<p>Since <span class="math inline">\(k = \bar{k}\)</span> is
+algebraically closed, the polynomial <span class="math inline">\(t^6 -
+b^{-1}\)</span> has a root in <span class="math inline">\(k\)</span>.
+Call this root <span class="math inline">\(u\)</span>. Then <span
+class="math inline">\(u^6 = b^{-1}\)</span>, so <span
+class="math inline">\(u^6 b = 1\)</span>.</p>
+<p><strong>Step 4: Conclusion.</strong> The map <span
+class="math inline">\((x, y) \mapsto (u^2 x, u^3 y)\)</span> is an
+isomorphism from <span class="math inline">\(E_b\)</span> to <span
+class="math inline">\(E_1\)</span>. ◻</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 17</strong>. <em>For studying <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O)\)</span> for
+<span class="math inline">\(j = 0\)</span> curves, it suffices to work
+with the canonical model <span class="math display">\[\begin{equation}
+\label{eq:canonical-j0}
+E_1: y^2 = x^3 + 1.
+\end{equation}\]</span> Any automorphism of <span
+class="math inline">\(E_b\)</span> conjugates to an automorphism of
+<span class="math inline">\(E_1\)</span> via the scaling
+isomorphism.</em></p>
+</div>
+<h1 id="explicit-description-of-automorphisms-for-j-0">Explicit
+Description of Automorphisms for <span class="math inline">\(j =
+0\)</span></h1>
+<h2 id="sixth-roots-of-unity">Sixth Roots of Unity</h2>
+<p>Before constructing the automorphisms, we establish notation for
+roots of unity.</p>
+<div class="definition">
+<p><strong>Definition 18</strong>. The <strong><span
+class="math inline">\(n\)</span>-th roots of unity</strong> in <span
+class="math inline">\(k\)</span> are elements <span
+class="math inline">\(\zeta \in k\)</span> satisfying <span
+class="math inline">\(\zeta^n = 1\)</span>. They form a subgroup <span
+class="math inline">\(\mu_n(k) \subseteq k^\times\)</span>.</p>
+</div>
+<div id="lem:roots-of-unity" class="lemma">
+<p><strong>Lemma 19</strong>. <em>In an algebraically closed field <span
+class="math inline">\(k\)</span> of characteristic <span
+class="math inline">\(p \geq 0\)</span>, if <span
+class="math inline">\(\gcd(n, p) = 1\)</span> (or <span
+class="math inline">\(p = 0\)</span>), then <span
+class="math inline">\(|\mu_n(k)| = n\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> The <span class="math inline">\(n\)</span>-th roots
+of unity are roots of <span class="math inline">\(x^n - 1\)</span>. When
+<span class="math inline">\(\gcd(n, p) = 1\)</span> (or <span
+class="math inline">\(p = 0\)</span>), the derivative <span
+class="math inline">\(nx^{n-1}\)</span> is non-zero for <span
+class="math inline">\(x \neq 0\)</span>, so <span
+class="math inline">\(x^n - 1\)</span> and its derivative share no
+common roots. Thus <span class="math inline">\(x^n - 1\)</span> has
+<span class="math inline">\(n\)</span> distinct roots. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 20</strong>. When <span class="math inline">\(p \mid
+n\)</span>, the polynomial <span class="math inline">\(x^n - 1\)</span>
+becomes inseparable and has fewer than <span
+class="math inline">\(n\)</span> distinct roots. However, this case does
+not arise in our setting since <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span> and we work
+with <span class="math inline">\(n \in \{2, 3, 4, 6\}\)</span>.</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 21</strong>. <em>Since <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span> and <span
+class="math inline">\(6 = 2 \cdot 3\)</span>, we have <span
+class="math inline">\(\gcd(6, \operatorname{char}(k)) = 1\)</span>, so
+<span class="math inline">\(|\mu_6(k)| = 6\)</span>.</em></p>
+</div>
+<div class="definition">
+<p><strong>Definition 22</strong>. A <strong>primitive <span
+class="math inline">\(n\)</span>-th root of unity</strong> is an element
+<span class="math inline">\(\zeta \in \mu_n(k)\)</span> of exact order
+<span class="math inline">\(n\)</span>, i.e., <span
+class="math inline">\(\zeta^n = 1\)</span> but <span
+class="math inline">\(\zeta^m \neq 1\)</span> for <span
+class="math inline">\(0 &lt; m &lt; n\)</span>.</p>
+</div>
+<div id="lem:sixth-roots" class="lemma">
+<p><strong>Lemma 23</strong>. <em>Let <span class="math inline">\(\omega
+\in k\)</span> be a primitive cube root of unity, i.e., <span
+class="math inline">\(\omega^3 = 1\)</span> and <span
+class="math inline">\(\omega \neq 1\)</span>. Then:</em></p>
+<ol>
+<li><p><em><span class="math inline">\(\omega^2 + \omega + 1 =
+0\)</span>.</em></p></li>
+<li><p><em>The six 6th roots of unity are: <span
+class="math inline">\(\mu_6(k) = \{1, -1, \omega, -\omega, \omega^2,
+-\omega^2\}\)</span>.</em></p></li>
+<li><p><em>A primitive 6th root of unity is <span
+class="math inline">\(\zeta_6 = -\omega^2\)</span> (or equivalently
+<span class="math inline">\(-\omega\)</span>).</em></p></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <strong>(i)</strong> Since <span
+class="math inline">\(\omega^3 = 1\)</span> and <span
+class="math inline">\(\omega \neq 1\)</span>, we have <span
+class="math inline">\(\omega^3 - 1 = 0\)</span>, which factors as: <span
+class="math display">\[(\omega - 1)(\omega^2 + \omega + 1) = 0.\]</span>
+Since <span class="math inline">\(\omega \neq 1\)</span>, we must have
+<span class="math inline">\(\omega^2 + \omega + 1 = 0\)</span>.</p>
+<p><strong>(ii)</strong> An element <span
+class="math inline">\(\zeta\)</span> is a 6th root of unity iff <span
+class="math inline">\(\zeta^6 = 1\)</span>. The listed elements all
+satisfy this:</p>
+<ul>
+<li><p><span class="math inline">\(1^6 = 1\)</span>, <span
+class="math inline">\((-1)^6 = 1\)</span>.</p></li>
+<li><p><span class="math inline">\(\omega^6 = (\omega^3)^2 = 1^2 =
+1\)</span>, and similarly for <span
+class="math inline">\(\omega^2\)</span>.</p></li>
+<li><p><span class="math inline">\((-\omega)^6 = (-1)^6 \omega^6 =
+1\)</span>, and similarly for <span
+class="math inline">\(-\omega^2\)</span>.</p></li>
+</ul>
+<p>Since there are exactly 6 sixth roots of unity and we have listed 6
+distinct elements, the list is complete.</p>
+<p><strong>(iii)</strong> We verify <span class="math inline">\(\zeta =
+-\omega^2\)</span> has order exactly 6: <span
+class="math display">\[\begin{align*}
+\zeta^1 &amp;= -\omega^2 \neq 1, \\
+\zeta^2 &amp;= \omega^4 = \omega \neq 1, \\
+\zeta^3 &amp;= -\omega^6 = -1 \neq 1, \\
+\zeta^4 &amp;= \omega^8 = \omega^2 \neq 1, \\
+\zeta^5 &amp;= -\omega^{10} = -\omega \neq 1, \\
+\zeta^6 &amp;= \omega^{12} = 1.
+\end{align*}\]</span> Thus <span
+class="math inline">\(-\omega^2\)</span> has order exactly 6. ◻</p>
+</div>
+<h2 id="candidates-for-automorphisms">Candidates for Automorphisms</h2>
+<div class="definition">
+<p><strong>Definition 24</strong>. For each <span
+class="math inline">\(\zeta \in \mu_6(k)\)</span>, define the map <span
+class="math display">\[\begin{equation}
+\label{eq:phi-zeta}
+\phi_\zeta: E_1 \to E_1, \quad (x, y) \mapsto (\zeta^2 x, \zeta^3 y).
+\end{equation}\]</span></p>
+</div>
+<div id="prop:phi-zeta-is-aut" class="proposition">
+<p><strong>Proposition 25</strong>. <em>For each 6th root of unity <span
+class="math inline">\(\zeta\)</span>, the map <span
+class="math inline">\(\phi_\zeta\)</span> is an automorphism of <span
+class="math inline">\(E_1\)</span> fixing <span
+class="math inline">\(O\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> We verify three properties:</p>
+<p><strong>(1) <span class="math inline">\(\phi_\zeta\)</span> maps
+<span class="math inline">\(E_1\)</span> to itself (preserves the curve
+equation):</strong></p>
+<p>Let <span class="math inline">\((x, y) \in E_1\)</span>, so <span
+class="math inline">\(y^2 = x^3 + 1\)</span>. We must show that <span
+class="math inline">\((\zeta^2 x, \zeta^3 y)\)</span> also satisfies
+<span class="math inline">\(y^2 = x^3 + 1\)</span>.</p>
+<p>Compute: <span class="math display">\[\begin{align*}
+(\zeta^3 y)^2 &amp;= \zeta^6 y^2 = 1 \cdot y^2 = y^2 \quad \text{(since
+$\zeta^6 = 1$)}, \\
+(\zeta^2 x)^3 + 1 &amp;= \zeta^6 x^3 + 1 = 1 \cdot x^3 + 1 = x^3 + 1
+\quad \text{(since $\zeta^6 = 1$)}.
+\end{align*}\]</span></p>
+<p>Since <span class="math inline">\(y^2 = x^3 + 1\)</span>, both
+expressions equal <span class="math inline">\(x^3 + 1\)</span>. Thus
+<span class="math inline">\((\zeta^2 x, \zeta^3 y)\)</span> satisfies
+the curve equation.</p>
+<p><strong>(2) <span class="math inline">\(\phi_\zeta\)</span> fixes
+<span class="math inline">\(O\)</span> (the point at
+infinity):</strong></p>
+<p>The curve <span class="math inline">\(E_1\)</span> in projective
+coordinates <span class="math inline">\([X:Y:Z]\)</span> (where <span
+class="math inline">\(x = X/Z\)</span>, <span class="math inline">\(y =
+Y/Z\)</span>) is: <span class="math display">\[Y^2 Z = X^3 +
+Z^3.\]</span></p>
+<p>The identity element is <span class="math inline">\(O =
+[0:1:0]\)</span> (the unique point with <span class="math inline">\(Z =
+0\)</span>).</p>
+<p>The map <span class="math inline">\(\phi_\zeta\)</span> in projective
+coordinates is: <span class="math display">\[\phi_\zeta: [X:Y:Z] \mapsto
+[\zeta^2 X : \zeta^3 Y : Z].\]</span></p>
+<p>Evaluating at <span class="math inline">\(O = [0:1:0]\)</span>: <span
+class="math display">\[\phi_\zeta([0:1:0]) = [\zeta^2 \cdot 0 : \zeta^3
+\cdot 1 : 0] = [0 : \zeta^3 : 0].\]</span></p>
+<p>In projective space, <span class="math inline">\([0:\lambda:0] =
+[0:1:0]\)</span> for any <span class="math inline">\(\lambda \neq
+0\)</span>. Since <span class="math inline">\(\zeta \neq 0\)</span>
+(it’s a root of unity), we have <span class="math inline">\(\zeta^3 \neq
+0\)</span>, so <span class="math inline">\([0:\zeta^3:0] = [0:1:0] =
+O\)</span>.</p>
+<p><strong>(3) <span class="math inline">\(\phi_\zeta\)</span> is a
+bijection (invertible):</strong></p>
+<p>The inverse map is <span
+class="math inline">\(\phi_{\zeta^{-1}}\)</span>: <span
+class="math display">\[\begin{align*}
+\phi_\zeta \circ \phi_{\zeta^{-1}}(x, y) &amp;= \phi_\zeta(\zeta^{-2}x,
+\zeta^{-3}y) \\
+&amp;= (\zeta^2 \cdot \zeta^{-2} x, \zeta^3 \cdot \zeta^{-3} y) \\
+&amp;= (x, y).
+\end{align*}\]</span></p>
+<p>Similarly, <span class="math inline">\(\phi_{\zeta^{-1}} \circ
+\phi_\zeta = \mathrm{id}\)</span>. ◻</p>
+</div>
+<h2 id="the-six-automorphisms-explicitly">The Six Automorphisms
+Explicitly</h2>
+<div id="thm:six-auts" class="theorem">
+<p><strong>Theorem 26</strong>. <em>The six automorphisms of <span
+class="math inline">\(E_1\)</span> fixing <span
+class="math inline">\(O\)</span> are given by <span
+class="math inline">\(\phi_\zeta\)</span> for <span
+class="math inline">\(\zeta \in \mu_6(k)\)</span>:</em></p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><em><span
+class="math inline">\(\zeta\)</span></em></th>
+<th style="text-align: center;"><em><span
+class="math inline">\(\zeta^2\)</span></em></th>
+<th style="text-align: center;"><em><span
+class="math inline">\(\zeta^3\)</span></em></th>
+<th style="text-align: left;"><em><span
+class="math inline">\(\phi_\zeta(x,y)\)</span></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((x,
+y)\)</span> (identity)</em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(-1\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(-1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((x,
+-y)\)</span> (hyperelliptic involution)</em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega^2\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((\omega^2
+x, y)\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(-\omega\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega^2\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(-1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((\omega^2
+x, -y)\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega^2\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((\omega x,
+y)\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(-\omega^2\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(\omega\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(-1\)</span></em></td>
+<td style="text-align: left;"><em><span class="math inline">\((\omega x,
+-y)\)</span></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>where <span class="math inline">\(\omega\)</span> is a primitive
+cube root of unity.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> We compute <span
+class="math inline">\(\zeta^2\)</span> and <span
+class="math inline">\(\zeta^3\)</span> for each <span
+class="math inline">\(\zeta\)</span>, using <span
+class="math inline">\(\omega^3 = 1\)</span>:</p>
+<p><strong><span class="math inline">\(\zeta = 1\)</span>:</strong>
+<span class="math inline">\(\zeta^2 = 1\)</span>, <span
+class="math inline">\(\zeta^3 = 1\)</span>. Map: <span
+class="math inline">\((x,y) \mapsto (x,y)\)</span> (identity).</p>
+<p><strong><span class="math inline">\(\zeta = -1\)</span>:</strong>
+<span class="math inline">\(\zeta^2 = (-1)^2 = 1\)</span>, <span
+class="math inline">\(\zeta^3 = (-1)^3 = -1\)</span>. Map: <span
+class="math inline">\((x,y) \mapsto (x,-y)\)</span>.</p>
+<p><strong><span class="math inline">\(\zeta = \omega\)</span>:</strong>
+<span class="math inline">\(\zeta^2 = \omega^2\)</span>, <span
+class="math inline">\(\zeta^3 = \omega^3 = 1\)</span>. Map: <span
+class="math inline">\((x,y) \mapsto (\omega^2 x, y)\)</span>.</p>
+<p><strong><span class="math inline">\(\zeta =
+-\omega\)</span>:</strong> <span class="math inline">\(\zeta^2 =
+(-\omega)^2 = \omega^2\)</span>, <span class="math inline">\(\zeta^3 =
+(-\omega)^3 = -\omega^3 = -1\)</span>. Map: <span
+class="math inline">\((x,y) \mapsto (\omega^2 x, -y)\)</span>.</p>
+<p><strong><span class="math inline">\(\zeta =
+\omega^2\)</span>:</strong> <span class="math inline">\(\zeta^2 =
+\omega^4 = \omega^{3+1} = \omega\)</span>, <span
+class="math inline">\(\zeta^3 = \omega^6 = (\omega^3)^2 = 1\)</span>.
+Map: <span class="math inline">\((x,y) \mapsto (\omega x,
+y)\)</span>.</p>
+<p><strong><span class="math inline">\(\zeta =
+-\omega^2\)</span>:</strong> <span class="math inline">\(\zeta^2 =
+\omega^4 = \omega\)</span>, <span class="math inline">\(\zeta^3 =
+-\omega^6 = -1\)</span>. Map: <span class="math inline">\((x,y) \mapsto
+(\omega x, -y)\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 27</strong> (Geometric interpretation). The six
+automorphisms have natural geometric meanings:</p>
+<ul>
+<li><p><strong>Identity:</strong> <span class="math inline">\((x,y)
+\mapsto (x,y)\)</span> — do nothing.</p></li>
+<li><p><strong>Hyperelliptic involution:</strong> <span
+class="math inline">\((x,y) \mapsto (x,-y)\)</span> — reflection across
+the <span class="math inline">\(x\)</span>-axis. This is the map <span
+class="math inline">\(P \mapsto -P\)</span> in the group law.</p></li>
+<li><p><strong>Rotation by <span class="math inline">\(\pm
+120^\circ\)</span>:</strong> <span class="math inline">\((x,y) \mapsto
+(\omega^{\pm 1} x, y)\)</span> — these correspond to multiplying the
+<span class="math inline">\(x\)</span>-coordinate by a cube root of
+unity.</p></li>
+<li><p><strong>Combined:</strong> <span class="math inline">\((x,y)
+\mapsto (\omega^{\pm 1} x, -y)\)</span> — rotation followed by
+reflection.</p></li>
+</ul>
+</div>
+<h2 id="group-structure">Group Structure</h2>
+<div id="prop:aut-cyclic" class="proposition">
+<p><strong>Proposition 28</strong>. <em>The map <span
+class="math display">\[\Phi: \mu_6 \to \operatorname{Aut}(E_{\bar{k}},
+O), \quad \zeta \mapsto \phi_\zeta\]</span> is an injective group
+homomorphism.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <strong>Homomorphism:</strong> For <span
+class="math inline">\(\zeta_1, \zeta_2 \in \mu_6\)</span>, we compute:
+<span class="math display">\[\begin{align*}
+(\phi_{\zeta_1} \circ \phi_{\zeta_2})(x, y) &amp;=
+\phi_{\zeta_1}(\zeta_2^2 x, \zeta_2^3 y) \\
+&amp;= (\zeta_1^2 \cdot \zeta_2^2 x, \zeta_1^3 \cdot \zeta_2^3 y) \\
+&amp;= ((\zeta_1 \zeta_2)^2 x, (\zeta_1 \zeta_2)^3 y) \\
+&amp;= \phi_{\zeta_1 \zeta_2}(x, y).
+\end{align*}\]</span> Thus <span class="math inline">\(\phi_{\zeta_1}
+\circ \phi_{\zeta_2} = \phi_{\zeta_1 \zeta_2}\)</span>, confirming <span
+class="math inline">\(\Phi\)</span> is a homomorphism.</p>
+<p><strong>Injectivity:</strong> Suppose <span
+class="math inline">\(\phi_{\zeta_1} = \phi_{\zeta_2}\)</span>. Then for
+all <span class="math inline">\((x, y) \in E_1\)</span>: <span
+class="math display">\[(\zeta_1^2 x, \zeta_1^3 y) = (\zeta_2^2 x,
+\zeta_2^3 y).\]</span></p>
+<p>Choose a point with <span class="math inline">\(x \neq 0\)</span>.
+Then <span class="math inline">\(\zeta_1^2 x = \zeta_2^2 x\)</span>
+implies <span class="math inline">\(\zeta_1^2 = \zeta_2^2\)</span>.</p>
+<p>Choose a point with <span class="math inline">\(y \neq 0\)</span>.
+Then <span class="math inline">\(\zeta_1^3 y = \zeta_2^3 y\)</span>
+implies <span class="math inline">\(\zeta_1^3 = \zeta_2^3\)</span>.</p>
+<p>(Such points exist: <span class="math inline">\((0, 1)\)</span> has
+<span class="math inline">\(y \neq 0\)</span> since <span
+class="math inline">\(1^2 = 0^3 + 1\)</span>. For a point with <span
+class="math inline">\(x \neq 0\)</span>, note that <span
+class="math inline">\(x^3 + 1 = 0\)</span> has roots <span
+class="math inline">\(x \in \{-1, -\omega, -\omega^2\}\)</span> (since
+<span class="math inline">\(x^3 + 1 = (x+1)(x^2 - x + 1)\)</span> and
+<span class="math inline">\(x^2 - x + 1\)</span> has roots <span
+class="math inline">\(-\omega, -\omega^2\)</span>). Thus <span
+class="math inline">\((-1, 0) \in E_1\)</span> with <span
+class="math inline">\(x = -1 \neq 0\)</span>.)</p>
+<p>Now let <span class="math inline">\(\eta = \zeta_1 /
+\zeta_2\)</span>. Then <span class="math inline">\(\eta^2 = 1\)</span>
+and <span class="math inline">\(\eta^3 = 1\)</span>.</p>
+<p><strong>Claim:</strong> <span class="math inline">\(\eta =
+1\)</span>.</p>
+<p><strong>Proof of claim:</strong> Since <span
+class="math inline">\(\gcd(2, 3) = 1\)</span>, there exist integers
+<span class="math inline">\(a, b\)</span> with <span
+class="math inline">\(2a + 3b = 1\)</span> (e.g., <span
+class="math inline">\(a = -1\)</span>, <span class="math inline">\(b =
+1\)</span>). Then: <span class="math display">\[\eta = \eta^{2a + 3b} =
+(\eta^2)^a \cdot (\eta^3)^b = 1^a \cdot 1^b = 1.\]</span></p>
+<p>Thus <span class="math inline">\(\zeta_1 = \zeta_2\)</span>, proving
+injectivity. ◻</p>
+</div>
+<div id="cor:aut-is-z6" class="corollary">
+<p><strong>Corollary 29</strong>. <em>Assuming the surjectivity proved
+in Section <a href="#sec:no-other-auts" data-reference-type="ref"
+data-reference="sec:no-other-auts">4</a>, we have: <span
+class="math display">\[\operatorname{Aut}(E_{\bar{k}}, O) \cong \mu_6
+\cong \mathbb{Z}/6\mathbb{Z}.\]</span> The group is cyclic of order 6,
+generated by any primitive 6th root of unity (e.g., <span
+class="math inline">\(\phi_{-\omega^2}\)</span>).</em></p>
+</div>
+<div id="rem:lambda-notation" class="remark">
+<p><strong>Remark 30</strong> (Alternative notation: <span
+class="math inline">\(\{\pm 1, \pm\lambda, \pm\lambda^2\}\)</span>). In
+the cryptographic literature, particularly in the context of the GLV
+(Gallant–Lambert–Vanstone) method for scalar multiplication, the six
+automorphisms are often denoted <span class="math inline">\(\{\pm 1,
+\pm\lambda, \pm\lambda^2\}\)</span>. This notation arises from a
+different perspective:</p>
+<p>Consider the endomorphism <span class="math inline">\(\psi: (x, y)
+\mapsto (\omega x, y)\)</span> where <span
+class="math inline">\(\omega\)</span> is a primitive cube root of unity.
+On a point <span class="math inline">\(P\)</span> of prime order <span
+class="math inline">\(n\)</span>, we have <span
+class="math inline">\(\psi(P) = [\lambda]P\)</span> for some <span
+class="math inline">\(\lambda \in \mathbb{Z}/n\mathbb{Z}\)</span>. This
+eigenvalue <span class="math inline">\(\lambda\)</span> satisfies: <span
+class="math display">\[\lambda^2 + \lambda + 1 \equiv 0
+\pmod{n}\]</span> since <span class="math inline">\(\psi^2 + \psi + 1 =
+0\)</span> (the minimal polynomial of <span
+class="math inline">\(\omega\)</span>).</p>
+<p>The correspondence between notations is:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Our notation</th>
+<th style="text-align: center;">GLV notation</th>
+<th style="text-align: center;">Map <span class="math inline">\((x,y)
+\mapsto\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([1]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_{-1}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([-1]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((x,
+-y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_{\omega^2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([\lambda]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\omega x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_{-\omega^2}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([-\lambda]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\omega x,
+-y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_{\omega}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([\lambda^2]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\omega^2 x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\phi_{-\omega}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\([-\lambda^2]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\((\omega^2 x,
+-y)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Note that <span class="math inline">\(\phi_{\omega^2}\)</span>
+corresponds to <span class="math inline">\([\lambda]\)</span> because
+<span class="math inline">\(\phi_{\omega^2}: (x,y) \mapsto (\omega x, y)
+= \psi(x,y)\)</span>. The apparent discrepancy (<span
+class="math inline">\(\omega\)</span> vs. <span
+class="math inline">\(\omega^2\)</span>) arises because <span
+class="math inline">\((\omega^2)^2 = \omega^4 = \omega\)</span> when
+<span class="math inline">\(\omega^3 = 1\)</span>.</p>
+<p>For secp256k1, the eigenvalue is: <span
+class="math display">\[\lambda =
+\texttt{0x5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72}\]</span>
+satisfying <span class="math inline">\(\lambda^2 + \lambda + 1 \equiv 0
+\pmod{n}\)</span> where <span class="math inline">\(n\)</span> is the
+group order.</p>
+</div>
+<h1 id="sec:no-other-auts">Proof That No Other Automorphisms Exist</h1>
+<p>We now prove that the six automorphisms <span
+class="math inline">\(\phi_\zeta\)</span> are the <em>only</em>
+automorphisms of <span class="math inline">\(E_1\)</span> fixing <span
+class="math inline">\(O\)</span>. We give two approaches: a direct
+computational proof (Method A) and a citation of the classification
+theorem (Method B).</p>
+<h2 id="method-a-direct-weierstrass-computation">Method A: Direct
+Weierstrass Computation</h2>
+<div id="thm:no-other-auts" class="theorem">
+<p><strong>Theorem 31</strong>. <em>Every automorphism <span
+class="math inline">\(\phi \in \operatorname{Aut}(E_1, O)\)</span> has
+the form <span class="math inline">\(\phi = \phi_\zeta\)</span> for some
+6th root of unity <span class="math inline">\(\zeta\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> The most general change of coordinates preserving the
+Weierstrass form over a field of characteristic <span
+class="math inline">\(&gt; 3\)</span> is: <span
+class="math display">\[\begin{equation}
+\label{eq:general-transform}
+(x, y) \mapsto (u^2 x + r, \, u^3 y + u^2 s x + t)
+\end{equation}\]</span> for some <span class="math inline">\(u \in
+k^\times\)</span> and <span class="math inline">\(r, s, t \in
+k\)</span>. This is the standard form derived in <span class="citation"
+data-cites="silverman"></span>.</p>
+<p>We determine which choices give an automorphism of <span
+class="math inline">\(E_1: y^2 = x^3 + 1\)</span> that fixes <span
+class="math inline">\(O\)</span>.</p>
+<p><strong>Step 1: Substituting into the curve equation.</strong></p>
+<p>Let <span class="math inline">\((x&#39;, y&#39;) = (u^2 x + r, u^3 y
++ u^2 s x + t)\)</span>. The inverse transformation is: <span
+class="math display">\[\begin{align*}
+x &amp;= u^{-2}(x&#39; - r), \\
+y &amp;= u^{-3}(y&#39; - u^2 s \cdot u^{-2}(x&#39; - r) - t) =
+u^{-3}(y&#39; - s(x&#39; - r) - t).
+\end{align*}\]</span></p>
+<p>Substituting into <span class="math inline">\(y^2 = x^3 + 1\)</span>:
+<span class="math display">\[\begin{align*}
+u^{-6}(y&#39; - sx&#39; + sr - t)^2 &amp;= u^{-6}(x&#39; - r)^3 + 1.
+\end{align*}\]</span></p>
+<p>Multiplying both sides by <span class="math inline">\(u^6\)</span>:
+<span class="math display">\[\begin{equation}
+\label{eq:expanded}
+(y&#39; - sx&#39; + sr - t)^2 = (x&#39; - r)^3 + u^6.
+\end{equation}\]</span></p>
+<p><strong>Step 2: Expanding both sides.</strong></p>
+<p><strong>Left side:</strong> Let <span class="math inline">\(A = sr -
+t\)</span> for brevity. <span class="math display">\[\begin{align*}
+(y&#39; - sx&#39; + A)^2 &amp;= y&#39;^2 - 2sx&#39;y&#39; + 2Ay&#39; +
+s^2 x&#39;^2 - 2sAx&#39; + A^2.
+\end{align*}\]</span></p>
+<p><strong>Right side:</strong> <span
+class="math display">\[\begin{align*}
+(x&#39; - r)^3 + u^6 &amp;= x&#39;^3 - 3rx&#39;^2 + 3r^2 x&#39; - r^3 +
+u^6.
+\end{align*}\]</span></p>
+<p><strong>Step 3: Comparing coefficients.</strong></p>
+<p>For the transformed curve to have short Weierstrass form <span
+class="math inline">\(y&#39;^2 = x&#39;^3 + b&#39;\)</span>, we
+need:</p>
+<p><strong>Coefficient of <span
+class="math inline">\(x&#39;y&#39;\)</span>:</strong> <span
+class="math display">\[\text{LHS: } -2s, \quad \text{RHS: } 0.\]</span>
+Thus <span class="math inline">\(-2s = 0\)</span>, giving <span
+class="math inline">\(\boxed{s = 0}\)</span>.</p>
+<p><strong>Coefficient of <span class="math inline">\(y&#39;\)</span>
+(with <span class="math inline">\(s = 0\)</span>, so <span
+class="math inline">\(A = -t\)</span>):</strong> <span
+class="math display">\[\text{LHS: } 2A = -2t, \quad \text{RHS: }
+0.\]</span> Thus <span class="math inline">\(-2t = 0\)</span>, giving
+<span class="math inline">\(\boxed{t = 0}\)</span>.</p>
+<p><strong>Coefficient of <span class="math inline">\(x&#39;^2\)</span>
+(with <span class="math inline">\(s = t = 0\)</span>):</strong> <span
+class="math display">\[\text{LHS: } s^2 = 0, \quad \text{RHS: }
+-3r.\]</span> Thus <span class="math inline">\(-3r = 0\)</span>. Since
+<span class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>, we
+have <span class="math inline">\(3 \neq 0\)</span>, so <span
+class="math inline">\(\boxed{r = 0}\)</span>.</p>
+<p><strong>Step 4: Simplified transformation.</strong></p>
+<p>With <span class="math inline">\(r = s = t = 0\)</span>, the
+transformation becomes: <span class="math display">\[(x, y) \mapsto (u^2
+x, u^3 y).\]</span></p>
+<p>Equation <a href="#eq:expanded" data-reference-type="eqref"
+data-reference="eq:expanded">[eq:expanded]</a> simplifies to: <span
+class="math display">\[y&#39;^2 = x&#39;^3 + u^6.\]</span></p>
+<p><strong>Step 5: Condition for automorphism.</strong></p>
+<p>For <span class="math inline">\(\phi\)</span> to be an automorphism
+of <span class="math inline">\(E_1\)</span> (not just a morphism to some
+other curve), the image curve must be <span
+class="math inline">\(E_1\)</span> itself, i.e., we need <span
+class="math inline">\(y&#39;^2 = x&#39;^3 + 1\)</span>.</p>
+<p>Comparing with <span class="math inline">\(y&#39;^2 = x&#39;^3 +
+u^6\)</span>, we require: <span class="math display">\[u^6 =
+1.\]</span></p>
+<p>Thus <span class="math inline">\(u\)</span> must be a 6th root of
+unity.</p>
+<p><strong>Conclusion:</strong> Every automorphism of <span
+class="math inline">\(E_1\)</span> fixing <span
+class="math inline">\(O\)</span> has the form <span
+class="math inline">\(\phi(x, y) = (u^2 x, u^3 y)\)</span> where <span
+class="math inline">\(u \in \mu_6\)</span>. This is exactly <span
+class="math inline">\(\phi_\zeta\)</span> with <span
+class="math inline">\(\zeta = u\)</span>. ◻</p>
+</div>
+<h2 id="method-b-the-classification-theorem-black-box">Method B: The
+Classification Theorem (Black Box)</h2>
+<p>For completeness, we state the general classification theorem.</p>
+<div id="thm:silverman-classification" class="theorem">
+<p><strong>Theorem 32</strong> (Silverman, Theorem III.10.1). <em>Let
+<span class="math inline">\(E\)</span> be an elliptic curve over an
+algebraically closed field <span class="math inline">\(k\)</span> with
+<span class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>.
+Then:</em></p>
+<ol>
+<li><p><em>If <span class="math inline">\(j(E) \neq 0\)</span> and <span
+class="math inline">\(j(E) \neq 1728\)</span>, then <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| = 2\)</span>.
+The automorphisms are <span class="math inline">\(\pm
+\mathrm{id}\)</span>.</em></p></li>
+<li><p><em>If <span class="math inline">\(j(E) = 1728\)</span>, then
+<span class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| =
+4\)</span>. The automorphisms form a group isomorphic to <span
+class="math inline">\(\mathbb{Z}/4\mathbb{Z}\)</span>.</em></p></li>
+<li><p><em>If <span class="math inline">\(j(E) = 0\)</span>, then <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| = 6\)</span>.
+The automorphisms form a group isomorphic to <span
+class="math inline">\(\mathbb{Z}/6\mathbb{Z}\)</span>.</em></p></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> See <span class="citation"
+data-cites="silverman"></span>. The proof analyzes the general
+Weierstrass isomorphism formula exactly as we did in Method A, but
+systematically for all values of <span class="math inline">\(a\)</span>
+and <span class="math inline">\(b\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 33</strong>. Theorem <a
+href="#thm:silverman-classification" data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a> encompasses our
+Method A result as the special case <span class="math inline">\(j =
+0\)</span>. The theorem provides additional information about the cases
+<span class="math inline">\(j \neq 0\)</span>.</p>
+</div>
+<h1 id="sec:classification">Global Classification: No <span
+class="math inline">\(j\)</span> with <span
+class="math inline">\(|\operatorname{Aut}| &gt; 6\)</span></h1>
+<div id="thm:global-max" class="theorem">
+<p><strong>Theorem 34</strong>. <em>For elliptic curves over an
+algebraically closed field <span class="math inline">\(k\)</span> with
+<span class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>:
+<span class="math display">\[\max_{E/k} |\operatorname{Aut}(E_{\bar{k}},
+O)| = 6,\]</span> and this maximum is attained exactly when <span
+class="math inline">\(j(E) = 0\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This is immediate from Theorem <a
+href="#thm:silverman-classification" data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a>: the only possible
+values of <span class="math inline">\(|\operatorname{Aut}(E_{\bar{k}},
+O)|\)</span> are <span class="math inline">\(\{2, 4, 6\}\)</span>,
+with:</p>
+<ul>
+<li><p>6 occurring precisely for <span class="math inline">\(j =
+0\)</span>,</p></li>
+<li><p>4 occurring precisely for <span class="math inline">\(j =
+1728\)</span>,</p></li>
+<li><p>2 occurring for all other <span
+class="math inline">\(j\)</span>.</p></li>
+</ul>
+<p>The maximum is 6, achieved only at <span class="math inline">\(j =
+0\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 35</strong> (Characteristics 2 and 3). In
+characteristic 2 and 3, the situation is different. Supersingular
+elliptic curves can have larger automorphism groups:</p>
+<ul>
+<li><p>In characteristic 2: <span
+class="math inline">\(|\operatorname{Aut}(E, O)|\)</span> can be 2, 4,
+8, or 24.</p></li>
+<li><p>In characteristic 3: <span
+class="math inline">\(|\operatorname{Aut}(E, O)|\)</span> can be 2, 4,
+6, or 12.</p></li>
+</ul>
+<p>See <span class="citation" data-cites="silverman"></span> for
+details. These cases are explicitly <strong>excluded</strong> from our
+setting by the assumption <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>.</p>
+</div>
+<h1 id="meta-arguments-why-no-hidden-curves-exist">Meta-Arguments: Why
+No “Hidden” Curves Exist</h1>
+<p>This section addresses potential concerns about whether some
+“unknown” or “exotic” elliptic curve might have a larger automorphism
+group. We show that the classification is exhaustive and complete.</p>
+<h2 id="the-moduli-space-perspective">The Moduli Space Perspective</h2>
+<div class="proposition">
+<p><strong>Proposition 36</strong>. <em>Isomorphism classes of elliptic
+curves over <span class="math inline">\(\bar{k}\)</span> are in
+bijection with elements of <span class="math inline">\(\bar{k}\)</span>
+via the <span class="math inline">\(j\)</span>-invariant: <span
+class="math display">\[\{\text{Elliptic curves over } \bar{k}\}/\cong
+\;\; \longleftrightarrow \;\; \bar{k}.\]</span></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This is Theorem <a href="#thm:j-classification"
+data-reference-type="ref"
+data-reference="thm:j-classification">13</a>. ◻</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 37</strong>. <em>The classification in Theorem <a
+href="#thm:silverman-classification" data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a> covers
+<strong>every</strong> elliptic curve over <span
+class="math inline">\(\bar{k}\)</span>. There is no room for an elliptic
+curve whose <span class="math inline">\(j\)</span>-invariant “escapes”
+the classification.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> Every elliptic curve <span
+class="math inline">\(E\)</span> over <span
+class="math inline">\(\bar{k}\)</span> has a <span
+class="math inline">\(j\)</span>-invariant <span
+class="math inline">\(j(E) \in \bar{k}\)</span>. This value <span
+class="math inline">\(j(E)\)</span> falls into one of three cases: <span
+class="math inline">\(j(E) = 0\)</span>, <span
+class="math inline">\(j(E) = 1728\)</span>, or <span
+class="math inline">\(j(E) \notin \{0, 1728\}\)</span>. In each case,
+Theorem <a href="#thm:silverman-classification"
+data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a> determines <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}},
+O)|\)</span>. ◻</p>
+</div>
+<p>The key insight is that the <span
+class="math inline">\(j\)</span>-invariant provides a
+<strong>complete</strong> parametrization. The classification isn’t a
+list of examples that might be incomplete; it’s a structural result that
+applies to all curves by virtue of how they’re defined.</p>
+<h2 id="the-complex-analytic-viewpoint">The Complex-Analytic
+Viewpoint</h2>
+<p>Over <span class="math inline">\(\mathbb{C}\)</span>, elliptic curves
+correspond to complex tori.</p>
+<div id="prop:complex-torus" class="proposition">
+<p><strong>Proposition 38</strong>. <em>Every elliptic curve <span
+class="math inline">\(E\)</span> over <span
+class="math inline">\(\mathbb{C}\)</span> is isomorphic to <span
+class="math inline">\(\mathbb{C}/\Lambda\)</span> for some lattice <span
+class="math inline">\(\Lambda = \mathbb{Z}\tau + \mathbb{Z}\)</span>
+with <span class="math inline">\(\Im(\tau) &gt; 0\)</span>.</em></p>
+</div>
+<div id="prop:complex-aut" class="proposition">
+<p><strong>Proposition 39</strong>. <em>Let <span
+class="math inline">\(E = \mathbb{C}/\Lambda\)</span>. Then: <span
+class="math display">\[\operatorname{Aut}(E, O) \cong \{\alpha \in
+\mathbb{C}^\times : \alpha \Lambda = \Lambda\}.\]</span> That is,
+automorphisms correspond to complex numbers that scale the lattice to
+itself.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> An automorphism of <span class="math inline">\(E =
+\mathbb{C}/\Lambda\)</span> fixing <span class="math inline">\(O = 0 +
+\Lambda\)</span> is a holomorphic map <span class="math inline">\(\phi:
+\mathbb{C}/\Lambda \to \mathbb{C}/\Lambda\)</span> with <span
+class="math inline">\(\phi(0) = 0\)</span>. Such maps lift to
+multiplication by some <span class="math inline">\(\alpha \in
+\mathbb{C}^\times\)</span> on <span
+class="math inline">\(\mathbb{C}\)</span>, with the condition that <span
+class="math inline">\(\alpha \Lambda \subseteq \Lambda\)</span>. For
+<span class="math inline">\(\phi\)</span> to be an isomorphism, we need
+<span class="math inline">\(\alpha \Lambda = \Lambda\)</span>. ◻</p>
+</div>
+<p>The lattices fall into exactly three types:</p>
+<ol>
+<li><p><strong>Generic lattice:</strong> <span
+class="math inline">\(\alpha \Lambda = \Lambda\)</span> only for <span
+class="math inline">\(\alpha = \pm 1\)</span>, giving <span
+class="math inline">\(|\operatorname{Aut}| = 2\)</span>.</p></li>
+<li><p><strong>Square lattice</strong> <span
+class="math inline">\(\Lambda = \mathbb{Z}+ i\mathbb{Z}\)</span>: The
+units of <span class="math inline">\(\mathbb{Z}[i]\)</span> (Gaussian
+integers) are <span class="math inline">\(\{\pm 1, \pm i\}\)</span>.
+These all satisfy <span class="math inline">\(\alpha \Lambda =
+\Lambda\)</span>, giving <span
+class="math inline">\(|\operatorname{Aut}| = 4\)</span>. This
+corresponds to <span class="math inline">\(j = 1728\)</span>.</p></li>
+<li><p><strong>Hexagonal lattice</strong> <span
+class="math inline">\(\Lambda = \mathbb{Z}+ \omega\mathbb{Z}\)</span>
+where <span class="math inline">\(\omega = e^{2\pi i/3}\)</span>: The
+units of <span class="math inline">\(\mathbb{Z}[\omega]\)</span>
+(Eisenstein integers) are <span class="math inline">\(\{\pm 1, \pm
+\omega, \pm \omega^2\}\)</span>. These all satisfy <span
+class="math inline">\(\alpha \Lambda = \Lambda\)</span>, giving <span
+class="math inline">\(|\operatorname{Aut}| = 6\)</span>. This
+corresponds to <span class="math inline">\(j = 0\)</span>.</p></li>
+</ol>
+<div class="remark">
+<p><strong>Remark 40</strong>. This complex-analytic perspective
+provides an independent confirmation of the classification. The three
+cases correspond to:</p>
+<ul>
+<li><p>Generic lattices (most lattices),</p></li>
+<li><p>The unique lattice with 4-fold rotational symmetry (square
+lattice),</p></li>
+<li><p>The unique lattice with 6-fold rotational symmetry (hexagonal
+lattice).</p></li>
+</ul>
+<p>No lattice can have higher rotational symmetry, because the only
+finite rotation groups of <span
+class="math inline">\(\mathbb{C}\)</span> compatible with a lattice
+structure are of order 1, 2, 3, 4, or 6 (the “crystallographic
+restriction”).</p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 41</strong>. <em>The Eisenstein integers <span
+class="math inline">\(\mathbb{Z}[\omega]\)</span> and Gaussian integers
+<span class="math inline">\(\mathbb{Z}[i]\)</span> are the only
+imaginary quadratic rings with more than two units.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> For an imaginary quadratic field <span
+class="math inline">\(K = \mathbb{Q}(\sqrt{d})\)</span> with <span
+class="math inline">\(d &lt; 0\)</span>, the ring of integers <span
+class="math inline">\(\mathcal{O}_K\)</span> has unit group:</p>
+<ul>
+<li><p><span class="math inline">\(\mathcal{O}_K^\times = \{\pm
+1\}\)</span> if <span class="math inline">\(d \neq -1,
+-3\)</span>,</p></li>
+<li><p><span class="math inline">\(\mathcal{O}_K^\times = \{\pm 1, \pm
+i\}\)</span> if <span class="math inline">\(d = -1\)</span> (Gaussian
+integers),</p></li>
+<li><p><span class="math inline">\(\mathcal{O}_K^\times = \{\pm 1, \pm
+\omega, \pm \omega^2\}\)</span> if <span class="math inline">\(d =
+-3\)</span> (Eisenstein integers).</p></li>
+</ul>
+<p>This follows from the theory of Dirichlet’s unit theorem applied to
+imaginary quadratic fields. ◻</p>
+</div>
+<p>This explains algebraically why exactly these three automorphism
+group sizes occur.</p>
+<h2 id="isogenies-do-not-create-larger-automorphism-groups">Isogenies Do
+Not Create Larger Automorphism Groups</h2>
+<div class="definition">
+<p><strong>Definition 42</strong>. An <strong>isogeny</strong> <span
+class="math inline">\(\phi: E \to E&#39;\)</span> is a non-constant
+morphism of elliptic curves that maps <span
+class="math inline">\(O_E\)</span> to <span
+class="math inline">\(O_{E&#39;}\)</span>. Two curves are
+<strong>isogenous</strong> if there exists an isogeny between them.</p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 43</strong>. <em>If <span
+class="math inline">\(E&#39;\)</span> is isogenous to <span
+class="math inline">\(E\)</span> over <span
+class="math inline">\(\bar{k}\)</span>, then <span
+class="math inline">\(E&#39;\)</span> is still an elliptic curve over
+<span class="math inline">\(\bar{k}\)</span> with some <span
+class="math inline">\(j(E&#39;) \in \bar{k}\)</span>, and <span
+class="math inline">\(|\operatorname{Aut}(E&#39;_{\bar{k}}, O)|\)</span>
+is determined by Theorem <a href="#thm:silverman-classification"
+data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> An isogeny <span class="math inline">\(\phi: E \to
+E&#39;\)</span> has as its target an elliptic curve <span
+class="math inline">\(E&#39;\)</span> by definition. Every elliptic
+curve over <span class="math inline">\(\bar{k}\)</span> has a <span
+class="math inline">\(j\)</span>-invariant, and the classification
+applies. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 44</strong> (Isogenies do not increase <span
+class="math inline">\(|\operatorname{Aut}|\)</span>). Even if we explore
+all curves isogenous to a given curve, each such curve is still
+classified by its <span class="math inline">\(j\)</span>-invariant. The
+isogeny class of a curve with <span class="math inline">\(j = 0\)</span>
+contains curves with various <span
+class="math inline">\(j\)</span>-invariants, but none of them can have
+<span class="math inline">\(|\operatorname{Aut}| &gt; 6\)</span> in
+characteristic <span class="math inline">\(&gt; 3\)</span>.</p>
+<p>In fact, computational experiments show that for <span
+class="math inline">\(j = 0\)</span> curves, all other <span
+class="math inline">\(j\)</span>-invariants in the isogeny class
+typically give <em>smaller</em> automorphism groups (<span
+class="math inline">\(|\operatorname{Aut}| = 2\)</span>), making <span
+class="math inline">\(j = 0\)</span> uniquely optimal within its isogeny
+class.</p>
+</div>
+<h2
+id="complex-multiplication-does-not-increase-operatornameaut">Complex
+Multiplication Does Not Increase <span
+class="math inline">\(|\operatorname{Aut}|\)</span></h2>
+<div class="definition">
+<p><strong>Definition 45</strong>. In characteristic 0, an elliptic
+curve <span class="math inline">\(E\)</span> over <span
+class="math inline">\(\bar{k}\)</span> has <strong>complex
+multiplication</strong> (CM) if <span
+class="math inline">\(\operatorname{End}(E_{\bar{k}})\)</span> is
+strictly larger than <span class="math inline">\(\mathbb{Z}\)</span>. In
+this case, <span
+class="math inline">\(\operatorname{End}(E_{\bar{k}})\)</span> is an
+order in an imaginary quadratic field <span class="math inline">\(K =
+\mathbb{Q}(\sqrt{-d})\)</span> for some <span class="math inline">\(d
+&gt; 0\)</span>.</p>
+</div>
+<div class="remark">
+<p><strong>Remark 46</strong> (Positive characteristic). In
+characteristic <span class="math inline">\(p &gt; 0\)</span>, curves
+with <span class="math inline">\(\operatorname{End}(E_{\bar{k}})
+\supsetneq \mathbb{Z}\)</span> fall into two categories:</p>
+<ul>
+<li><p><strong>Ordinary curves:</strong> <span
+class="math inline">\(\operatorname{End}(E_{\bar{k}})\)</span> is an
+order in an imaginary quadratic field (analogous to CM in char
+0).</p></li>
+<li><p><strong>Supersingular curves:</strong> <span
+class="math inline">\(\operatorname{End}(E_{\bar{k}})\)</span> is a
+maximal order in a quaternion algebra over <span
+class="math inline">\(\mathbb{Q}\)</span>.</p></li>
+</ul>
+<p>The term “CM” is sometimes reserved for the ordinary case. However,
+for our purposes (counting automorphisms), the distinction does not
+matter—see Section <a href="#sec:end-positive-char"
+data-reference-type="ref" data-reference="sec:end-positive-char">9.4</a>
+for details.</p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 47</strong>. <em>Having complex multiplication
+does not increase <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)|\)</span>
+beyond the classification.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> The automorphism group <span
+class="math inline">\(\operatorname{Aut}(E, O)\)</span> equals the
+<strong>unit group</strong> of <span
+class="math inline">\(\operatorname{End}(E)\)</span>: <span
+class="math display">\[\operatorname{Aut}(E, O) =
+\operatorname{End}(E)^\times.\]</span> Here <span
+class="math inline">\(\operatorname{End}(E)^\times\)</span> denotes
+endomorphisms that are invertible as morphisms, i.e., those of degree 1.
+An endomorphism <span class="math inline">\(\phi \in
+\operatorname{End}(E)\)</span> is a unit if and only if there exists
+<span class="math inline">\(\psi \in \operatorname{End}(E)\)</span> with
+<span class="math inline">\(\phi \circ \psi = \psi \circ \phi =
+\mathrm{id}\)</span>, which happens precisely when <span
+class="math inline">\(\phi\)</span> is an automorphism fixing <span
+class="math inline">\(O\)</span>.</p>
+<p>Even when <span class="math inline">\(\operatorname{End}(E)\)</span>
+is a larger ring (CM case), its unit group is still finite and
+bounded:</p>
+<ul>
+<li><p>For orders in <span class="math inline">\(\mathbb{Q}(i)\)</span>:
+units are <span class="math inline">\(\{\pm 1, \pm i\}\)</span> at most,
+giving <span class="math inline">\(|\operatorname{Aut}| \leq
+4\)</span>.</p></li>
+<li><p>For orders in <span
+class="math inline">\(\mathbb{Q}(\omega)\)</span>: units are <span
+class="math inline">\(\{\pm 1, \pm \omega, \pm \omega^2\}\)</span> at
+most, giving <span class="math inline">\(|\operatorname{Aut}| \leq
+6\)</span>.</p></li>
+<li><p>For orders in other imaginary quadratic fields: units are <span
+class="math inline">\(\{\pm 1\}\)</span>, giving <span
+class="math inline">\(|\operatorname{Aut}| = 2\)</span>.</p></li>
+</ul>
+<p>The curves with <span class="math inline">\(j = 0\)</span> have <span
+class="math inline">\(\operatorname{End}(E) \supseteq
+\mathbb{Z}[\omega]\)</span>, achieving the maximum of 6 units. Having CM
+with a larger endomorphism ring doesn’t add units beyond those already
+in the base ring. ◻</p>
+</div>
+<h2 id="mathematical-classification-vs.-lists-of-examples">Mathematical
+Classification vs. Lists of Examples</h2>
+<div class="remark">
+<p><strong>Remark 48</strong> (The nature of mathematical
+classification). The classification of automorphism groups is a
+<strong>structural theorem</strong>, not a catalog of known examples.
+The theorem states:</p>
+<blockquote>
+<p>For <em>every</em> elliptic curve <span
+class="math inline">\(E\)</span> over <span
+class="math inline">\(\bar{k}\)</span> with <span
+class="math inline">\(\operatorname{char}(\bar{k}) &gt; 3\)</span>, the
+value of <span class="math inline">\(|\operatorname{Aut}(E_{\bar{k}},
+O)|\)</span> is uniquely determined by <span
+class="math inline">\(j(E)\)</span>.</p>
+</blockquote>
+<p>This is fundamentally different from empirical statements like “all
+known curves satisfy <span class="math inline">\(|\operatorname{Aut}|
+\leq 6\)</span>.” The classification covers <em>all</em> curves,
+including those never explicitly written down.</p>
+<p>The proof proceeds by exhaustive analysis of coordinate
+transformations. Since:</p>
+<ol>
+<li><p>Every elliptic curve has a Weierstrass equation (after possibly
+extending the field),</p></li>
+<li><p>Every automorphism corresponds to an admissible coordinate
+change,</p></li>
+<li><p>The admissible coordinate changes have a known parametric
+form,</p></li>
+<li><p>Analyzing this form yields exactly which transformations are
+automorphisms,</p></li>
+</ol>
+<p>the classification is complete by construction.</p>
+</div>
+<h2 id="computational-verification-sanity-check">Computational
+Verification (Sanity Check)</h2>
+<div class="remark">
+<p><strong>Remark 49</strong>. While not a substitute for proof, one can
+verify consistency with databases:</p>
+<ul>
+<li><p>The LMFDB (L-functions and Modular Forms Database) contains
+extensive data on elliptic curves over <span
+class="math inline">\(\mathbb{Q}\)</span> and finite fields.</p></li>
+<li><p>The Cremona tables catalog elliptic curves over <span
+class="math inline">\(\mathbb{Q}\)</span> up to large conductor
+bounds.</p></li>
+<li><p>In all cases examined, <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| \in \{2, 4,
+6\}\)</span> for curves in characteristic <span
+class="math inline">\(&gt; 3\)</span>.</p></li>
+</ul>
+<p>This consistency is expected since these databases contain examples
+of curves, and the classification applies to all examples. The databases
+cannot contain counterexamples because none exist—not because we haven’t
+found them, but because the mathematical structure forbids them.</p>
+</div>
+<h1 id="sec:twists">Twists and the Role of the Automorphism Group</h1>
+<p>The classification <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| \in \{2, 4,
+6\}\)</span> has an immediate and beautiful consequence: it governs the
+structure of <strong>twists</strong> of elliptic curves. The existence
+of sextic twists is <em>equivalent</em> to <span
+class="math inline">\(|\operatorname{Aut}| = 6\)</span>, i.e., to <span
+class="math inline">\(j = 0\)</span>.</p>
+<h2 id="definition-of-twists-and-galois-cohomology">Definition of Twists
+and Galois Cohomology</h2>
+<div id="def:twist" class="definition">
+<p><strong>Definition 50</strong> (Twist). Let <span
+class="math inline">\(K\)</span> be a field with separable closure <span
+class="math inline">\(\bar{K}\)</span>, and let <span
+class="math inline">\(E/K\)</span> be an elliptic curve. A
+<strong>twist</strong> of <span class="math inline">\(E\)</span> over
+<span class="math inline">\(K\)</span> is an elliptic curve <span
+class="math inline">\(E^{\mathrm{tw}}/K\)</span> such that <span
+class="math display">\[E^{\mathrm{tw}}_{\bar{K}} \cong
+E_{\bar{K}}.\]</span> Two twists are considered equivalent if they are
+isomorphic over <span class="math inline">\(K\)</span>. We write <span
+class="math inline">\(\mathrm{Twist}(E/K)\)</span> for the set of
+equivalence classes of twists of <span class="math inline">\(E\)</span>
+over <span class="math inline">\(K\)</span>.</p>
+</div>
+<p>The key theorem connecting twists to automorphisms uses Galois
+cohomology:</p>
+<div id="thm:twists-cohomology" class="theorem">
+<p><strong>Theorem 51</strong> (Twists and cohomology). <em>Let <span
+class="math inline">\(E/K\)</span> be an elliptic curve over a field
+<span class="math inline">\(K\)</span> with <span
+class="math inline">\(\operatorname{char}(K) &gt; 3\)</span>, and let
+<span class="math inline">\(G_K =
+\operatorname{Gal}(\bar{K}/K)\)</span>. There is a natural bijection:
+<span class="math display">\[\mathrm{Twist}(E/K) \;\cong\; H^1(G_K,
+\operatorname{Aut}(E_{\bar{K}}, O)).\]</span></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This is a standard result in the theory of algebraic
+groups and descent. See <span class="citation"
+data-cites="silverman"></span> for the complete proof. The key idea is
+that a twist corresponds to a “way of descending” the isomorphism <span
+class="math inline">\(E^{\mathrm{tw}}_{\bar{K}} \cong
+E_{\bar{K}}\)</span> to <span class="math inline">\(K\)</span>, and such
+descents are classified by <span
+class="math inline">\(H^1\)</span>. ◻</p>
+</div>
+<p>Recall from our earlier work that in characteristic <span
+class="math inline">\(&gt; 3\)</span>: <span
+class="math display">\[\operatorname{Aut}(E_{\bar{K}}, O) \cong \mu_n
+\quad \text{where } n \in \{2, 4, 6\},\]</span> with <span
+class="math inline">\(n = 2\)</span> for generic <span
+class="math inline">\(j\)</span>, <span class="math inline">\(n =
+4\)</span> for <span class="math inline">\(j = 1728\)</span>, and <span
+class="math inline">\(n = 6\)</span> for <span class="math inline">\(j =
+0\)</span>.</p>
+<h2 id="structure-of-twists-when-operatornameautcong-mu_n">Structure of
+Twists When <span class="math inline">\(\operatorname{Aut}\cong
+\mu_n\)</span></h2>
+<div id="prop:h1-mu-n" class="proposition">
+<p><strong>Proposition 52</strong> (Structure of <span
+class="math inline">\(H^1(G_K, \mu_n)\)</span>). <em>Let <span
+class="math inline">\(K\)</span> be a field of characteristic <span
+class="math inline">\(&gt; 3\)</span>, and <span class="math inline">\(n
+\in \{2, 4, 6\}\)</span>.</em></p>
+<ol>
+<li><p><em>Every twist of <span class="math inline">\(E\)</span>
+corresponds to an element in <span class="math inline">\(H^1(G_K,
+\mu_n)\)</span>.</em></p></li>
+<li><p><em>If <span class="math inline">\(\mu_n \subseteq K\)</span>
+(i.e., all <span class="math inline">\(n\)</span>-th roots of unity are
+in <span class="math inline">\(K\)</span>), there is a natural
+isomorphism: <span class="math display">\[H^1(G_K, \mu_n) \;\cong\;
+K^\times / (K^\times)^n.\]</span></em></p></li>
+<li><p><em>The group <span class="math inline">\(H^1(G_K,
+\mu_n)\)</span> has a filtration by subgroups corresponding to divisors
+of <span class="math inline">\(n\)</span>: <span
+class="math display">\[H^1(G_K, \mu_d) \hookrightarrow H^1(G_K, \mu_n)
+\quad \text{for } d \mid n.\]</span></em></p></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <strong>(i)</strong> follows from Theorem <a
+href="#thm:twists-cohomology" data-reference-type="ref"
+data-reference="thm:twists-cohomology">51</a> and <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O) \cong
+\mu_n\)</span>.</p>
+<p><strong>(ii)</strong> When <span class="math inline">\(\mu_n
+\subseteq K\)</span>, the Galois action on <span
+class="math inline">\(\mu_n\)</span> is trivial, and the Kummer sequence
+<span class="math display">\[1 \to \mu_n \to \bar{K}^\times
+\xrightarrow{x \mapsto x^n} \bar{K}^\times \to 1\]</span> gives rise to
+the connecting homomorphism in cohomology: <span
+class="math display">\[K^\times / (K^\times)^n \xrightarrow{\sim}
+H^1(G_K, \mu_n).\]</span></p>
+<p><strong>(iii)</strong> The inclusion <span
+class="math inline">\(\mu_d \hookrightarrow \mu_n\)</span> for <span
+class="math inline">\(d \mid n\)</span> induces the map on
+cohomology.</p>
+<p>See <span class="citation" data-cites="silverman"></span> for
+details. ◻</p>
+</div>
+<div id="thm:twist-classification" class="theorem">
+<p><strong>Theorem 53</strong> (Classification of twist types). <em>Let
+<span class="math inline">\(K\)</span> be a field of characteristic
+<span class="math inline">\(&gt; 3\)</span>, and let <span
+class="math inline">\(E/K\)</span> be an elliptic curve.</em></p>
+<ol>
+<li><p><em><strong>Generic case (<span class="math inline">\(j \neq 0,
+1728\)</span>):</strong> <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O) \cong
+\mu_2\)</span>, so <span class="math display">\[\mathrm{Twist}(E/K)
+\cong H^1(G_K, \mu_2).\]</span> All twists are <strong>quadratic
+twists</strong>, classified by <span
+class="math inline">\(K^\times/(K^\times)^2\)</span> when <span
+class="math inline">\(-1 \in K\)</span>.</em></p></li>
+<li><p><em><strong>Case <span class="math inline">\(j =
+1728\)</span>:</strong> <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O) \cong
+\mu_4\)</span>, so <span class="math display">\[\mathrm{Twist}(E/K)
+\cong H^1(G_K, \mu_4).\]</span> Besides quadratic twists (from <span
+class="math inline">\(\mu_2 \subset \mu_4\)</span>), there exist
+<strong>quartic twists</strong>.</em></p></li>
+<li><p><em><strong>Case <span class="math inline">\(j =
+0\)</span>:</strong> <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O) \cong
+\mu_6\)</span>, so <span class="math display">\[\mathrm{Twist}(E/K)
+\cong H^1(G_K, \mu_6).\]</span> Besides quadratic twists (from <span
+class="math inline">\(\mu_2 \subset \mu_6\)</span>), there
+exist:</em></p>
+<ul>
+<li><p><em><strong>Cubic twists</strong> (from <span
+class="math inline">\(\mu_3 \subset \mu_6\)</span>),</em></p></li>
+<li><p><em><strong>Sextic twists</strong> (from elements of exact order
+6 in <span class="math inline">\(\mu_6\)</span>).</em></p></li>
+</ul></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This follows directly from Theorem <a
+href="#thm:twists-cohomology" data-reference-type="ref"
+data-reference="thm:twists-cohomology">51</a> and the classification of
+<span class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O)\)</span>
+from Section <a href="#sec:classification" data-reference-type="ref"
+data-reference="sec:classification">5</a>. The subgroup structure of
+<span class="math inline">\(\mu_n\)</span> determines which
+“lower-degree” twists exist:</p>
+<ul>
+<li><p><span class="math inline">\(\mu_2\)</span> has no proper
+subgroups containing elements of order <span class="math inline">\(&gt;
+1\)</span> besides itself.</p></li>
+<li><p><span class="math inline">\(\mu_4\)</span> has <span
+class="math inline">\(\mu_2\)</span> as a subgroup.</p></li>
+<li><p><span class="math inline">\(\mu_6\)</span> has <span
+class="math inline">\(\mu_2\)</span> and <span
+class="math inline">\(\mu_3\)</span> as subgroups.</p></li>
+</ul>
+<p>Elements of <span class="math inline">\(H^1(G_K, \mu_n)\)</span>
+coming from a proper subgroup <span class="math inline">\(\mu_d
+\subsetneq \mu_n\)</span> correspond to twists of “lower degree” <span
+class="math inline">\(d\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 54</strong> (Key insight). The existence of sextic
+twists is <strong>equivalent</strong> to the condition <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{K}}, O)| = 6\)</span>,
+which is equivalent to <span class="math inline">\(j(E) = 0\)</span>.
+This is not a coincidence—the automorphisms <em>are</em> what make the
+different twist structures possible.</p>
+</div>
+<h2 id="explicit-formulas-for-twists-of-j-0-curves">Explicit Formulas
+for Twists of <span class="math inline">\(j = 0\)</span> Curves</h2>
+<p>We now give explicit formulas for the model <span
+class="math inline">\(E_b: y^2 = x^3 + b\)</span> with <span
+class="math inline">\(j = 0\)</span>.</p>
+<div id="prop:twists-explicit" class="proposition">
+<p><strong>Proposition 55</strong> (Twists of <span
+class="math inline">\(E_b: y^2 = x^3 + b\)</span>). <em>Let <span
+class="math inline">\(K\)</span> be a field of characteristic <span
+class="math inline">\(&gt; 3\)</span>, <span class="math inline">\(b \in
+K^\times\)</span>, and <span class="math display">\[E_b/K: y^2 = x^3 +
+b, \quad j(E_b) = 0.\]</span> For each <span class="math inline">\(D \in
+K^\times\)</span>, consider the curve <span
+class="math display">\[E_{b,D}: y^2 = x^3 + D \cdot b.\]</span>
+Then:</em></p>
+<ol>
+<li><p><em><span class="math inline">\(E_{b,D}\)</span> is a twist of
+<span class="math inline">\(E_b\)</span> over <span
+class="math inline">\(K\)</span>.</em></p></li>
+<li><p><em><span class="math inline">\(E_{b,D_1} \cong_K
+E_{b,D_2}\)</span> if and only if <span class="math inline">\(D_1/D_2
+\in (K^\times)^6\)</span>.</em></p></li>
+<li><p><em>Therefore, isomorphism classes of twists of <span
+class="math inline">\(E_b\)</span> over <span
+class="math inline">\(K\)</span> are parametrized by <span
+class="math display">\[K^\times / (K^\times)^6,\]</span> in accordance
+with <span class="math inline">\(|\operatorname{Aut}(E_{\bar{K}}, O)| =
+6\)</span>.</em></p></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> <strong>(i)</strong> Over <span
+class="math inline">\(\bar{K}\)</span>, choose <span
+class="math inline">\(u \in \bar{K}\)</span> with <span
+class="math inline">\(u^6 = D\)</span>. Then the map <span
+class="math display">\[(x, y) \mapsto (u^2 x, u^3 y)\]</span> is an
+isomorphism from <span class="math inline">\(E_b\)</span> to <span
+class="math inline">\(E_{b,D}\)</span>: <span class="math display">\[y^2
+= x^3 + b \;\Longrightarrow\; (u^3 y)^2 = (u^2 x)^3 + u^6 b = (u^2 x)^3
++ D b.\]</span> So <span class="math inline">\(E_{b,D} \cong_{\bar{K}}
+E_b\)</span>.</p>
+<p><strong>(ii)</strong> <span class="math inline">\(E_{b,D_1} \cong_K
+E_{b,D_2}\)</span> iff there exists <span class="math inline">\(u \in
+K^\times\)</span> with: <span class="math display">\[D_2 b = u^6 \cdot
+D_1 b \;\Longrightarrow\; D_2 / D_1 = u^6 \in (K^\times)^6.\]</span></p>
+<p><strong>(iii)</strong> Follows from (ii). ◻</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 56</strong> (Substructure of twists for <span
+class="math inline">\(j = 0\)</span>). <em>For <span
+class="math inline">\(E_b: y^2 = x^3 + b\)</span> with <span
+class="math inline">\(j = 0\)</span>:</em></p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><em>Twist type</em></th>
+<th style="text-align: left;"><em>Subgroup of <span
+class="math inline">\(\mu_6\)</span></em></th>
+<th style="text-align: left;"><em>Parametrized by</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><em>Quadratic</em></td>
+<td style="text-align: left;"><em><span class="math inline">\(\mu_2 =
+\{1, -1\}\)</span></em></td>
+<td style="text-align: left;"><em><span
+class="math inline">\(K^\times/(K^\times)^2\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>Cubic</em></td>
+<td style="text-align: left;"><em><span class="math inline">\(\mu_3 =
+\{1, \omega, \omega^2\}\)</span></em></td>
+<td style="text-align: left;"><em><span
+class="math inline">\(K^\times/(K^\times)^3\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: left;"><em>Sextic</em></td>
+<td style="text-align: left;"><em>full <span
+class="math inline">\(\mu_6\)</span></em></td>
+<td style="text-align: left;"><em><span
+class="math inline">\(K^\times/(K^\times)^6\)</span></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Explicitly:</em></p>
+<ul>
+<li><p><em><strong>Quadratic twist</strong> by <span
+class="math inline">\(D\)</span>: corresponds to <span
+class="math inline">\(D \bmod (K^\times)^2\)</span>, giving <span
+class="math inline">\(E_{b,D^3}: y^2 = x^3 + D^3
+b\)</span>.</em></p></li>
+<li><p><em><strong>Cubic twist</strong> by <span
+class="math inline">\(D\)</span>: corresponds to <span
+class="math inline">\(D \bmod (K^\times)^3\)</span>, giving <span
+class="math inline">\(E_{b,D^2}: y^2 = x^3 + D^2
+b\)</span>.</em></p></li>
+<li><p><em><strong>Sextic twist</strong> by <span
+class="math inline">\(D\)</span>: corresponds to <span
+class="math inline">\(D \bmod (K^\times)^6\)</span>, giving <span
+class="math inline">\(E_{b,D}: y^2 = x^3 + D b\)</span>.</em></p></li>
+</ul>
+<p><em>A sextic twist is “genuinely new” (not quadratic or cubic) when
+<span class="math inline">\(D\)</span> is not a square or cube in <span
+class="math inline">\(K\)</span>.</em></p>
+</div>
+<div class="remark">
+<p><strong>Remark 57</strong> (Twists over <span
+class="math inline">\(\mathbb{Q}\)</span>). All elliptic curves over
+<span class="math inline">\(\mathbb{Q}\)</span> with <span
+class="math inline">\(j\)</span>-invariant 0 are sextic twists of one
+another. The set of such curves is parametrized by <span
+class="math inline">\(\mathbb{Q}^\times/(\mathbb{Q}^\times)^6\)</span>,
+which is infinite (since <span
+class="math inline">\(\mathbb{Q}^\times/(\mathbb{Q}^\times)^6 \cong
+\mathbb{Z}/6\mathbb{Z}\times \bigoplus_p
+\mathbb{Z}/6\mathbb{Z}\)</span>).</p>
+</div>
+<div class="example">
+<p><strong>Example 58</strong> (secp256k1 and its twists). The curve
+secp256k1: <span class="math inline">\(y^2 = x^3 + 7\)</span> over <span
+class="math inline">\(\mathbb{F}_p\)</span> has <span
+class="math inline">\(j = 0\)</span>.</p>
+<p><strong>Quadratic twist:</strong> For a non-square <span
+class="math inline">\(D \in \mathbb{F}_p^\times\)</span>: <span
+class="math display">\[E^{(D)}: y^2 = x^3 + D^3 \cdot 7.\]</span> The
+point counts satisfy <span class="math inline">\(|E(\mathbb{F}_p)| +
+|E^{(D)}(\mathbb{F}_p)| = 2p + 2\)</span>, so the quadratic twist has
+trace of Frobenius with opposite sign.</p>
+<p><strong>Cubic twist:</strong> If <span class="math inline">\(\omega
+\in \mathbb{F}_p\)</span> is a primitive cube root of unity (which
+exists since <span class="math inline">\(p \equiv 1 \pmod 3\)</span>),
+then for <span class="math inline">\(D\)</span> not a cube: <span
+class="math display">\[E^{(D)}: y^2 = x^3 + D^2 \cdot 7.\]</span></p>
+<p><strong>Sextic twist:</strong> For <span
+class="math inline">\(D\)</span> neither a square nor a cube in <span
+class="math inline">\(\mathbb{F}_p^\times\)</span>: <span
+class="math display">\[E^{(D)}: y^2 = x^3 + D \cdot 7.\]</span> This is
+isomorphic to secp256k1 only over a degree-6 extension of <span
+class="math inline">\(\mathbb{F}_p\)</span>.</p>
+</div>
+<div class="remark">
+<p><strong>Remark 59</strong> (Cryptographic relevance of twists). </p>
+<ol>
+<li><p><strong>Twist attacks:</strong> In ECDH and ECDSA, if a malicious
+party sends a point on a twist rather than the original curve, the
+discrete log may be computable in a smaller group. For <span
+class="math inline">\(j = 0\)</span> curves, there are more twist
+classes to consider.</p></li>
+<li><p><strong>Pairing-based cryptography:</strong> Curves with <span
+class="math inline">\(j = 0\)</span> (like BLS12-381) use sextic twists
+to define the “twist” subgroup <span class="math inline">\(G_2\)</span>
+for pairings. The sextic twist structure allows embedding degree
+optimization.</p></li>
+<li><p><strong>Hash-to-curve:</strong> The isogeny structure between a
+curve and its twists can be exploited for efficient deterministic
+hashing to the curve.</p></li>
+</ol>
+</div>
+<h2 id="the-fundamental-connection">The Fundamental Connection</h2>
+<p>We conclude this section by emphasizing the tight relationship:</p>
+<div class="theorem">
+<p><strong>Theorem 60</strong> (Automorphisms determine twist
+structure). <em>For an elliptic curve <span
+class="math inline">\(E\)</span> over a field <span
+class="math inline">\(K\)</span> of characteristic <span
+class="math inline">\(&gt; 3\)</span>: <span
+class="math display">\[\boxed{\text{Sextic twists of } E \text{ exist}
+\;\Longleftrightarrow\; |\operatorname{Aut}(E_{\bar{K}}, O)| = 6
+\;\Longleftrightarrow\; j(E) = 0.}\]</span> Similarly: <span
+class="math display">\[\begin{align*}
+\text{Quartic twists exist} &amp;\Longleftrightarrow
+|\operatorname{Aut}| \geq 4 \Longleftrightarrow j \in \{0, 1728\}, \\
+\text{Only quadratic twists exist} &amp;\Longleftrightarrow
+|\operatorname{Aut}| = 2 \Longleftrightarrow j \neq 0, 1728.
+\end{align*}\]</span></em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This is a direct consequence of Theorems <a
+href="#thm:twists-cohomology" data-reference-type="ref"
+data-reference="thm:twists-cohomology">51</a> and <a
+href="#thm:twist-classification" data-reference-type="ref"
+data-reference="thm:twist-classification">53</a>, combined with the
+classification of <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{K}}, O)\)</span> by
+<span class="math inline">\(j\)</span>-invariant. ◻</p>
+</div>
+<p>This theorem elegantly explains <em>why</em> the classification <span
+class="math inline">\(|\operatorname{Aut}| \in \{2, 4, 6\}\)</span>
+matters beyond just counting symmetries: it directly governs the
+arithmetic structure of how curves can be “twisted” over
+non-algebraically-closed fields.</p>
+<h1 id="examples-and-sanity-checks">Examples and Sanity Checks</h1>
+<h2 id="detailed-example-over-mathbbc">Detailed Example over <span
+class="math inline">\(\mathbb{C}\)</span></h2>
+<p>Consider <span class="math inline">\(E: y^2 = x^3 + 1\)</span> over
+<span class="math inline">\(\mathbb{C}\)</span>. This curve corresponds
+to the hexagonal lattice <span class="math inline">\(\Lambda =
+\mathbb{Z}+ \omega \mathbb{Z}\)</span> where <span
+class="math inline">\(\omega = e^{2\pi i/3}\)</span>.</p>
+<div class="proposition">
+<p><strong>Proposition 61</strong>. <em>The automorphism <span
+class="math inline">\(\phi_{\omega^2}: (x, y) \mapsto (\omega x,
+y)\)</span> corresponds to multiplication by <span
+class="math inline">\(\omega^2\)</span> on the torus <span
+class="math inline">\(\mathbb{C}/\Lambda\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> If <span class="math inline">\(z \in
+\mathbb{C}\)</span> corresponds to a point <span
+class="math inline">\((x, y) \in E(\mathbb{C})\)</span> via the
+Weierstrass parametrization, then: <span class="math display">\[x =
+\wp(z; \Lambda), \quad y = \wp&#39;(z; \Lambda),\]</span> where <span
+class="math inline">\(\wp\)</span> is the Weierstrass <span
+class="math inline">\(\wp\)</span>-function.</p>
+<p>For the hexagonal lattice with <span class="math inline">\(\omega^3 =
+1\)</span>, the <span class="math inline">\(\wp\)</span>-function
+satisfies: <span class="math display">\[\wp(\omega z; \Lambda) =
+\omega^{-2} \wp(z; \Lambda).\]</span></p>
+<p>This can be verified by noting that <span
+class="math inline">\(\omega \Lambda = \Lambda\)</span> (the lattice is
+preserved under multiplication by <span
+class="math inline">\(\omega\)</span>), and tracking how the double
+periodicity transforms.</p>
+<p>Since <span class="math inline">\(\omega^{-2} = \omega^{3-2} =
+\omega\)</span>, we have: <span class="math display">\[\wp(\omega z) =
+\omega \wp(z).\]</span></p>
+<p>For the derivative: <span class="math display">\[\wp&#39;(\omega z) =
+\frac{d}{d(\omega z)} \wp(\omega z) = \omega^{-1} \frac{d}{dz}(\omega
+\wp(z)) = \omega^{-1} \cdot \omega \cdot \wp&#39;(z) =
+\wp&#39;(z).\]</span></p>
+<p>Thus multiplication by <span class="math inline">\(\omega\)</span> on
+<span class="math inline">\(\mathbb{C}/\Lambda\)</span> induces: <span
+class="math display">\[(x, y) = (\wp(z), \wp&#39;(z)) \mapsto
+(\wp(\omega z), \wp&#39;(\omega z)) = (\omega \wp(z), \wp&#39;(z)) =
+(\omega x, y).\]</span></p>
+<p>This is <span class="math inline">\(\phi_{\omega^2}\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 62</strong>. The apparent mismatch (<span
+class="math inline">\(\omega^2\)</span> in the subscript
+vs. multiplication by <span class="math inline">\(\omega\)</span>)
+arises because our convention defines <span
+class="math inline">\(\phi_\zeta(x,y) = (\zeta^2 x, \zeta^3 y)\)</span>.
+For <span class="math inline">\(\zeta = \omega^2\)</span>: <span
+class="math inline">\(\zeta^2 = \omega^4 = \omega\)</span> and <span
+class="math inline">\(\zeta^3 = \omega^6 = 1\)</span>.</p>
+</div>
+<h2 id="detailed-example-over-mathbbf_p-with-p-equiv-1-pmod3">Detailed
+Example over <span class="math inline">\(\mathbb{F}_p\)</span> with
+<span class="math inline">\(p \equiv 1 \pmod{3}\)</span></h2>
+<p>Let <span class="math inline">\(p\)</span> be a prime with <span
+class="math inline">\(p \equiv 1 \pmod{3}\)</span>. Then <span
+class="math inline">\(\mathbb{F}_p^\times\)</span> has order <span
+class="math inline">\(p - 1\)</span>, which is divisible by 3. Thus
+<span class="math inline">\(\mathbb{F}_p\)</span> contains a primitive
+cube root of unity <span class="math inline">\(\omega\)</span>.</p>
+<div class="example">
+<p><strong>Example 63</strong> (Explicit computation for <span
+class="math inline">\(p = 7\)</span>). We have <span
+class="math inline">\(7 \equiv 1 \pmod{3}\)</span>. The primitive cube
+roots of unity in <span class="math inline">\(\mathbb{F}_7\)</span>
+satisfy <span class="math inline">\(\omega^3 = 1\)</span>, <span
+class="math inline">\(\omega \neq 1\)</span>, i.e., <span
+class="math inline">\(\omega^2 + \omega + 1 = 0\)</span>.</p>
+<p>Checking: <span class="math inline">\(2^3 = 8 \equiv 1
+\pmod{7}\)</span> and <span class="math inline">\(2 \neq 1\)</span>.
+Also <span class="math inline">\(2^2 + 2 + 1 = 7 \equiv 0
+\pmod{7}\)</span>. So <span class="math inline">\(\omega = 2\)</span>
+works.</p>
+<p>The 6th roots of unity in <span
+class="math inline">\(\mathbb{F}_7\)</span> are: <span
+class="math display">\[\mu_6(\mathbb{F}_7) = \{1, 6, 2, 5, 4, 3\} = \{1,
+-1, \omega, -\omega, \omega^2, -\omega^2\}.\]</span> (Here <span
+class="math inline">\(-1 = 6\)</span>, <span
+class="math inline">\(\omega = 2\)</span>, <span
+class="math inline">\(-\omega = 5\)</span>, <span
+class="math inline">\(\omega^2 = 4\)</span>, <span
+class="math inline">\(-\omega^2 = 3\)</span>.)</p>
+<p>The six automorphisms of <span class="math inline">\(E: y^2 = x^3 +
+1\)</span> over <span class="math inline">\(\mathbb{F}_7\)</span>
+are:</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span
+class="math inline">\(\zeta\)</span></th>
+<th style="text-align: left;"><span
+class="math inline">\(\phi_\zeta(x,y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(6\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((x, 6y) = (x,
+-y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((4x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(5\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((4x, 6y) =
+(4x, -y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(4\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((2x,
+y)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((2x, 6y) =
+(2x, -y)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All six automorphisms are defined over <span
+class="math inline">\(\mathbb{F}_7\)</span> (not just over <span
+class="math inline">\(\overline{\mathbb{F}_7}\)</span>) because <span
+class="math inline">\(\omega \in \mathbb{F}_7\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Example 64</strong> (secp256k1). The curve secp256k1 is
+defined over <span class="math inline">\(\mathbb{F}_p\)</span> where:
+<span class="math display">\[p = 2^{256} - 2^{32} - 977.\]</span></p>
+<p>One can verify that <span class="math inline">\(p \equiv 1
+\pmod{3}\)</span>: <span class="math display">\[2^{256} \equiv 2^{256
+\mod \phi(3)} = 2^{256 \mod 2} = 2^0 = 1 \pmod{3}.\]</span> <span
+class="math display">\[2^{32} \equiv 2^{32 \mod 2} = 2^0 = 1
+\pmod{3}.\]</span> <span class="math display">\[977 = 975 + 2 = 325
+\cdot 3 + 2 \equiv 2 \pmod{3}.\]</span> <span class="math display">\[p
+\equiv 1 - 1 - 2 \equiv -2 \equiv 1 \pmod{3}.\]</span></p>
+<p>Thus all six automorphisms exist over <span
+class="math inline">\(\mathbb{F}_p\)</span>. The cube root of unity is:
+<span class="math display">\[\omega =
+\texttt{0x7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee}.\]</span></p>
+<p>The automorphism <span class="math inline">\((x, y) \mapsto (\omega
+x, y)\)</span> can be computed with a single field multiplication,
+making automorphism detection in Pollard’s rho algorithm very
+efficient.</p>
+</div>
+<h2 id="example-over-mathbbf_p-with-p-equiv-2-pmod3">Example over <span
+class="math inline">\(\mathbb{F}_p\)</span> with <span
+class="math inline">\(p \equiv 2 \pmod{3}\)</span></h2>
+<div class="example">
+<p><strong>Example 65</strong> (<span class="math inline">\(p =
+5\)</span>). We have <span class="math inline">\(5 \equiv 2
+\pmod{3}\)</span>. The multiplicative group <span
+class="math inline">\(\mathbb{F}_5^\times\)</span> has order 4, not
+divisible by 3. Thus <span class="math inline">\(\mathbb{F}_5\)</span>
+contains no primitive cube root of unity.</p>
+<p>For <span class="math inline">\(E: y^2 = x^3 + 1\)</span> over <span
+class="math inline">\(\mathbb{F}_5\)</span>:</p>
+<ul>
+<li><p>Over <span class="math inline">\(\mathbb{F}_5\)</span>: <span
+class="math inline">\(\operatorname{Aut}(E_{\mathbb{F}_5}, O) = \{(x,y)
+\mapsto (x, y), \; (x,y) \mapsto (x, -y)\} \cong
+\mathbb{Z}/2\mathbb{Z}\)</span>.</p></li>
+<li><p>Over <span
+class="math inline">\(\overline{\mathbb{F}_5}\)</span>: <span
+class="math inline">\(\operatorname{Aut}(E_{\overline{\mathbb{F}_5}}, O)
+\cong \mathbb{Z}/6\mathbb{Z}\)</span> (all six automorphisms).</p></li>
+</ul>
+<p>The “missing” automorphisms require a cube root of unity <span
+class="math inline">\(\omega\)</span>, which exists in <span
+class="math inline">\(\mathbb{F}_{5^2} = \mathbb{F}_{25}\)</span> but
+not in <span class="math inline">\(\mathbb{F}_5\)</span>.</p>
+</div>
+<h2 id="contrast-j-1728">Contrast: <span class="math inline">\(j =
+1728\)</span></h2>
+<div class="example">
+<p><strong>Example 66</strong>. Consider <span class="math inline">\(E:
+y^2 = x^3 + x\)</span> with <span class="math inline">\(j(E) =
+1728\)</span>.</p>
+<p><strong>Claim:</strong> <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| = 4\)</span>,
+with automorphisms: <span class="math display">\[\phi_u: (x, y) \mapsto
+(u^2 x, u^3 y) \quad \text{for } u \in \mu_4 = \{1, -1, i, -i\} \text{
+where } u^4 = 1.\]</span></p>
+<p><strong>Proof:</strong> Using Method A, a transformation <span
+class="math inline">\((x, y) \mapsto (u^2 x, u^3 y)\)</span> preserves
+<span class="math inline">\(y^2 = x^3 + x\)</span> iff: <span
+class="math display">\[\begin{align*}
+(u^3 y)^2 &amp;= (u^2 x)^3 + (u^2 x) \\
+u^6 y^2 &amp;= u^6 x^3 + u^2 x.
+\end{align*}\]</span></p>
+<p>Substituting <span class="math inline">\(y^2 = x^3 + x\)</span>:
+<span class="math display">\[u^6 (x^3 + x) = u^6 x^3 + u^2 x \implies
+u^6 x = u^2 x.\]</span></p>
+<p>For this to hold for all <span class="math inline">\(x\)</span>, we
+need <span class="math inline">\(u^6 = u^2\)</span>, i.e., <span
+class="math inline">\(u^4 = 1\)</span>.</p>
+<p>Thus <span class="math inline">\(u \in \mu_4\)</span>, giving 4
+automorphisms:</p>
+<ul>
+<li><p><span class="math inline">\(u = 1\)</span>: <span
+class="math inline">\((x, y) \mapsto (x, y)\)</span></p></li>
+<li><p><span class="math inline">\(u = -1\)</span>: <span
+class="math inline">\((x, y) \mapsto (x, -y)\)</span></p></li>
+<li><p><span class="math inline">\(u = i\)</span>: <span
+class="math inline">\((x, y) \mapsto (i^2 x, i^3 y) = (-x,
+-iy)\)</span></p></li>
+<li><p><span class="math inline">\(u = -i\)</span>: <span
+class="math inline">\((x, y) \mapsto ((-i)^2 x, (-i)^3 y) = (-x,
+iy)\)</span></p></li>
+</ul>
+<p>This curve corresponds to the square lattice <span
+class="math inline">\(\Lambda = \mathbb{Z}+ i\mathbb{Z}\)</span> with
+unit group <span class="math inline">\(\mu_4\)</span>.</p>
+</div>
+<h2 id="contrast-generic-curve-j-neq-0-1728">Contrast: Generic Curve
+(<span class="math inline">\(j \neq 0, 1728\)</span>)</h2>
+<div class="example">
+<p><strong>Example 67</strong>. Consider <span class="math inline">\(E:
+y^2 = x^3 + 2x + 3\)</span>. We verify that <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| =
+2\)</span>.</p>
+<p>First, check non-singularity: <span class="math inline">\(\Delta =
+-16(4 \cdot 8 + 27 \cdot 9) = -16(32 + 243) = -16 \cdot 275 = -4400 \neq
+0\)</span>.</p>
+<p>Next, compute <span class="math inline">\(j\)</span>: <span
+class="math inline">\(j = 1728 \cdot 32 / 275 = 55296/275 \approx
+201\)</span>. Since <span class="math inline">\(j \neq 0, 1728\)</span>,
+this is a generic curve.</p>
+<p>A transformation <span class="math inline">\((x, y) \mapsto (u^2 x,
+u^3 y)\)</span> preserves <span class="math inline">\(y^2 = x^3 + 2x +
+3\)</span> iff: <span class="math display">\[u^6 y^2 = u^6 x^3 + 2u^2 x
++ 3.\]</span></p>
+<p>Substituting <span class="math inline">\(y^2 = x^3 + 2x + 3\)</span>:
+<span class="math display">\[u^6(x^3 + 2x + 3) = u^6 x^3 + 2u^2 x +
+3.\]</span></p>
+<p>Comparing coefficients:</p>
+<ul>
+<li><p><span class="math inline">\(x^3\)</span>: <span
+class="math inline">\(u^6 = u^6\)</span></p></li>
+<li><p><span class="math inline">\(x\)</span>: <span
+class="math inline">\(2u^6 = 2u^2 \implies u^4 = 1\)</span></p></li>
+<li><p>constant: <span class="math inline">\(3u^6 = 3 \implies u^6 =
+1\)</span></p></li>
+</ul>
+<p>So <span class="math inline">\(u^4 = 1\)</span> and <span
+class="math inline">\(u^6 = 1\)</span>. Since <span
+class="math inline">\(\gcd(4, 6) = 2\)</span>, we have <span
+class="math inline">\(u^2 = 1\)</span>, giving <span
+class="math inline">\(u = \pm 1\)</span>.</p>
+<p>Thus <span class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O) =
+\{(x,y) \mapsto (x,y), \; (x,y) \mapsto (x,-y)\} \cong
+\mathbb{Z}/2\mathbb{Z}\)</span>.</p>
+</div>
+<h1 id="advanced-topics">Advanced Topics</h1>
+<h2
+id="automorphisms-over-the-base-field-vs.-the-algebraic-closure">Automorphisms
+over the Base Field vs. the Algebraic Closure</h2>
+<p>So far we have worked over an algebraically closed field <span
+class="math inline">\(k = \bar{k}\)</span>. For applications, one often
+needs to understand which automorphisms are defined over a smaller base
+field <span class="math inline">\(K\)</span>.</p>
+<div class="definition">
+<p><strong>Definition 68</strong>. Let <span
+class="math inline">\(E\)</span> be an elliptic curve over a field <span
+class="math inline">\(K\)</span> with <span
+class="math inline">\(\operatorname{char}(K) &gt; 3\)</span>.
+Define:</p>
+<ul>
+<li><p><span class="math inline">\(\operatorname{Aut}(E_K, O)\)</span>:
+automorphisms of <span class="math inline">\(E\)</span> defined over
+<span class="math inline">\(K\)</span>,</p></li>
+<li><p><span class="math inline">\(\operatorname{Aut}(E_{\bar{K}},
+O)\)</span>: geometric automorphisms over <span
+class="math inline">\(\bar{K}\)</span>.</p></li>
+</ul>
+<p>There is a natural inclusion <span
+class="math inline">\(\operatorname{Aut}(E_K, O) \hookrightarrow
+\operatorname{Aut}(E_{\bar{K}}, O)\)</span>.</p>
+</div>
+<div id="prop:aut-over-K" class="proposition">
+<p><strong>Proposition 69</strong>. <em>For a curve <span
+class="math inline">\(E: y^2 = x^3 + b\)</span> with <span
+class="math inline">\(j(E) = 0\)</span> over a field <span
+class="math inline">\(K\)</span> of characteristic <span
+class="math inline">\(&gt; 3\)</span>: <span
+class="math display">\[\operatorname{Aut}(E_K, O) \cong
+\mu_6(K),\]</span> where <span class="math inline">\(\mu_6(K) = \{\zeta
+\in K : \zeta^6 = 1\}\)</span> is the group of 6th roots of unity in
+<span class="math inline">\(K\)</span>.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> An automorphism <span
+class="math inline">\(\phi_\zeta: (x,y) \mapsto (\zeta^2 x, \zeta^3
+y)\)</span> is defined over <span class="math inline">\(K\)</span> if
+and only if <span class="math inline">\(\zeta^2, \zeta^3 \in K\)</span>.
+Since <span class="math inline">\(\gcd(2,3) = 1\)</span>, this is
+equivalent to <span class="math inline">\(\zeta \in K\)</span>. Combined
+with <span class="math inline">\(\zeta^6 = 1\)</span>, this gives <span
+class="math inline">\(\zeta \in \mu_6(K)\)</span>. ◻</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 70</strong> (Automorphisms over finite fields).
+<em>For <span class="math inline">\(E: y^2 = x^3 + b\)</span> over <span
+class="math inline">\(\mathbb{F}_q\)</span> with <span
+class="math inline">\(q = p^n\)</span>, <span class="math inline">\(p
+&gt; 3\)</span>: <span
+class="math display">\[|\operatorname{Aut}(E_{\mathbb{F}_q}, O)| =
+\gcd(6, q-1).\]</span> Explicitly:</em></p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><em><span class="math inline">\(q \bmod
+6\)</span></em></th>
+<th style="text-align: center;"><em><span class="math inline">\(\gcd(6,
+q-1)\)</span></em></th>
+<th style="text-align: center;"><em><span
+class="math inline">\(|\operatorname{Aut}(E_{\mathbb{F}_q},
+O)|\)</span></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(1\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(6\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(6\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span
+class="math inline">\(5\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(2\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(2\)</span></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>(For <span class="math inline">\(p &gt; 3\)</span>, we have <span
+class="math inline">\(q \equiv 1\)</span> or <span
+class="math inline">\(5 \pmod 6\)</span>.)</em></p>
+</div>
+<div class="example">
+<p><strong>Example 71</strong> (secp256k1 revisited). For secp256k1,
+<span class="math inline">\(p \equiv 1 \pmod 3\)</span> and <span
+class="math inline">\(p \equiv 1 \pmod 2\)</span>, so <span
+class="math inline">\(p \equiv 1 \pmod 6\)</span>. Thus all six
+geometric automorphisms are defined over <span
+class="math inline">\(\mathbb{F}_p\)</span>: <span
+class="math display">\[|\operatorname{Aut}(E_{\mathbb{F}_p}, O)| =
+6.\]</span></p>
+</div>
+<div class="example">
+<p><strong>Example 72</strong> (Automorphisms over <span
+class="math inline">\(\mathbb{Q}\)</span> and <span
+class="math inline">\(\mathbb{R}\)</span>). For <span
+class="math inline">\(E: y^2 = x^3 + 1\)</span> over <span
+class="math inline">\(\mathbb{Q}\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\mu_6(\mathbb{Q}) = \{1,
+-1\}\)</span> (the only rational roots of unity),</p></li>
+<li><p>Thus <span
+class="math inline">\(|\operatorname{Aut}(E_\mathbb{Q}, O)| =
+2\)</span>.</p></li>
+</ul>
+<p>Over <span class="math inline">\(\mathbb{R}\)</span>: same result,
+<span class="math inline">\(|\operatorname{Aut}(E_\mathbb{R}, O)| =
+2\)</span>.</p>
+<p>Over <span class="math inline">\(\mathbb{C}\)</span>: <span
+class="math inline">\(\mu_6(\mathbb{C}) = \{1, -1, \omega, -\omega,
+\omega^2, -\omega^2\}\)</span>, so <span
+class="math inline">\(|\operatorname{Aut}(E_\mathbb{C}, O)| =
+6\)</span>.</p>
+</div>
+<h2 id="characteristics-2-and-3-the-excluded-cases">Characteristics 2
+and 3: The Excluded Cases</h2>
+<p>Our main results require <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>. Here we
+explain precisely what happens in characteristics 2 and 3.</p>
+<div class="theorem">
+<p><strong>Theorem 73</strong> (Automorphisms in characteristic 2 and
+3). <em>Over an algebraically closed field <span
+class="math inline">\(k\)</span>:</em></p>
+<ol>
+<li><p><em>In characteristic 2: <span
+class="math inline">\(|\operatorname{Aut}(E_k, O)| \in \{2, 4, 8,
+24\}\)</span>.</em></p></li>
+<li><p><em>In characteristic 3: <span
+class="math inline">\(|\operatorname{Aut}(E_k, O)| \in \{2, 4, 6,
+12\}\)</span>.</em></p></li>
+</ol>
+</div>
+<div class="proof">
+<p><em>Proof.</em> See <span class="citation"
+data-cites="silverman"></span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 74</strong> (Why larger groups exist in small
+characteristic). In characteristics 2 and 3, the Weierstrass equation
+takes different forms that allow additional symmetries:</p>
+<p><strong>Characteristic 2:</strong> The short Weierstrass form <span
+class="math inline">\(y^2 = x^3 + ax + b\)</span> is not available (we
+cannot complete the square). Instead, curves have forms like <span
+class="math inline">\(y^2 + xy = x^3 + a_2 x^2 + a_6\)</span> or <span
+class="math inline">\(y^2 + a_3 y = x^3 + a_4 x + a_6\)</span>.
+Supersingular curves in characteristic 2 can have automorphism groups of
+order up to 24.</p>
+<p><strong>Characteristic 3:</strong> Similarly, <span
+class="math inline">\(y^2 = x^3 + ax + b\)</span> is available but the
+polynomial <span class="math inline">\(x^3\)</span> has different
+behavior. Supersingular curves can have automorphism groups of order up
+to 12.</p>
+</div>
+<div class="example">
+<p><strong>Example 75</strong> (Order 24 in characteristic 2). Over
+<span class="math inline">\(\overline{\mathbb{F}_2}\)</span>, the curve
+<span class="math inline">\(y^2 + y = x^3\)</span> is supersingular with
+<span class="math inline">\(j = 0\)</span> and <span
+class="math inline">\(|\operatorname{Aut}(E, O)| = 24\)</span>. This
+group is isomorphic to <span
+class="math inline">\(\mathrm{SL}_2(\mathbb{F}_3)\)</span>.</p>
+</div>
+<div class="example">
+<p><strong>Example 76</strong> (Order 12 in characteristic 3). Over
+<span class="math inline">\(\overline{\mathbb{F}_3}\)</span>, the curve
+<span class="math inline">\(y^2 = x^3 - x\)</span> is supersingular with
+<span class="math inline">\(j = 0\)</span> and <span
+class="math inline">\(|\operatorname{Aut}(E, O)| = 12\)</span>.</p>
+</div>
+<div class="remark">
+<p><strong>Remark 77</strong> (Design decision). The restriction to
+characteristic <span class="math inline">\(&gt; 3\)</span> is standard
+in elliptic curve cryptography for several reasons:</p>
+<ol>
+<li><p>Short Weierstrass form is available, simplifying
+formulas.</p></li>
+<li><p>The classification <span
+class="math inline">\(|\operatorname{Aut}| \in \{2, 4, 6\}\)</span> is
+clean.</p></li>
+<li><p>Supersingular curves (which have larger automorphism groups in
+char 2, 3) are avoided for security reasons.</p></li>
+</ol>
+<p>Our statement “<span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| \leq
+6\)</span> in characteristic <span class="math inline">\(&gt;
+3\)</span>” is precisely valid, and the exclusion of characteristics 2
+and 3 is essential.</p>
+</div>
+<h2 id="the-moduli-perspective-j-0-as-an-orbifold-point">The Moduli
+Perspective: <span class="math inline">\(j = 0\)</span> as an Orbifold
+Point</h2>
+<p>The classification of automorphisms has a beautiful interpretation in
+terms of the moduli stack of elliptic curves.</p>
+<div class="definition">
+<p><strong>Definition 78</strong>. The <strong>moduli stack</strong>
+<span class="math inline">\(\mathcal{M}_{1,1}\)</span> parametrizes
+elliptic curves. Over an algebraically closed field <span
+class="math inline">\(k\)</span> of characteristic <span
+class="math inline">\(&gt; 3\)</span>, the coarse moduli space is the
+affine line <span class="math inline">\(\mathbb{A}^1_k\)</span> with
+coordinate <span class="math inline">\(j\)</span>.</p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 79</strong>. <em>The stabilizer of a geometric
+point of <span class="math inline">\(\mathcal{M}_{1,1}\)</span>
+corresponding to an elliptic curve <span
+class="math inline">\(E\)</span> is canonically isomorphic to <span
+class="math inline">\(\operatorname{Aut}(E_k, O)\)</span>.</em></p>
+</div>
+<p>This explains why <span class="math inline">\(j = 0\)</span> and
+<span class="math inline">\(j = 1728\)</span> are special:</p>
+<ul>
+<li><p><strong>Generic points</strong> (<span class="math inline">\(j
+\neq 0, 1728\)</span>): stabilizer of order 2, the minimum possible for
+an elliptic curve (since <span
+class="math inline">\(-\mathrm{id}\)</span> is always an
+automorphism).</p></li>
+<li><p><strong><span class="math inline">\(j = 1728\)</span></strong>:
+stabilizer of order 4, corresponding to the Gaussian symmetry (square
+lattice over <span class="math inline">\(\mathbb{C}\)</span>).</p></li>
+<li><p><strong><span class="math inline">\(j = 0\)</span></strong>:
+stabilizer of order 6, the maximum in characteristic <span
+class="math inline">\(&gt; 3\)</span>, corresponding to hexagonal
+symmetry (Eisenstein lattice over <span
+class="math inline">\(\mathbb{C}\)</span>).</p></li>
+</ul>
+<div class="remark">
+<p><strong>Remark 80</strong> (Orbifold points). In the language of
+stacks, <span class="math inline">\(j = 0\)</span> and <span
+class="math inline">\(j = 1728\)</span> are <strong>orbifold
+points</strong> where the moduli stack has non-trivial automorphisms.
+The point <span class="math inline">\(j = 0\)</span> is the “most
+symmetric” point in characteristic <span class="math inline">\(&gt;
+3\)</span>, having the largest stabilizer group.</p>
+</div>
+<div class="proposition">
+<p><strong>Proposition 81</strong> (Uniqueness of the maximum). <em>In
+characteristic <span class="math inline">\(&gt; 3\)</span>, the point
+<span class="math inline">\(j = 0\)</span> is the unique point of <span
+class="math inline">\(\mathcal{M}_{1,1}\)</span> with stabilizer of
+order 6. No other point has a larger stabilizer.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> This follows from Theorem <a
+href="#thm:silverman-classification" data-reference-type="ref"
+data-reference="thm:silverman-classification">32</a>: the only possible
+stabilizer orders are <span class="math inline">\(\{2, 4, 6\}\)</span>,
+and 6 is achieved exactly at <span class="math inline">\(j =
+0\)</span>. ◻</p>
+</div>
+<h2 id="sec:end-positive-char">The Identity <span
+class="math inline">\(\operatorname{Aut}(E, O) =
+\operatorname{End}(E)^\times\)</span> in Detail</h2>
+<p>We now give a more detailed treatment of the relationship between
+automorphisms and the endomorphism ring.</p>
+<div id="prop:aut-end-units" class="proposition">
+<p><strong>Proposition 82</strong>. <em>For an elliptic curve <span
+class="math inline">\(E\)</span> over an algebraically closed field
+<span class="math inline">\(k\)</span>: <span
+class="math display">\[\operatorname{Aut}(E_k, O) =
+\operatorname{End}(E_k)^\times,\]</span> where <span
+class="math inline">\(\operatorname{End}(E_k)^\times\)</span> denotes
+the group of units (invertible elements) in the endomorphism
+ring.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> An endomorphism <span class="math inline">\(\phi: E
+\to E\)</span> is in <span
+class="math inline">\(\operatorname{End}(E_k)^\times\)</span> if and
+only if there exists <span class="math inline">\(\psi: E \to E\)</span>
+with <span class="math inline">\(\phi \circ \psi = \psi \circ \phi =
+[1]\)</span> (the identity map). This happens if and only if <span
+class="math inline">\(\phi\)</span> is an isomorphism, which (since
+<span class="math inline">\(\phi\)</span> is a group homomorphism fixing
+<span class="math inline">\(O\)</span>) means <span
+class="math inline">\(\phi \in \operatorname{Aut}(E_k, O)\)</span>.</p>
+<p>Alternatively, <span class="math inline">\(\phi \in
+\operatorname{End}(E_k)^\times\)</span> iff <span
+class="math inline">\(\deg(\phi) = 1\)</span> (since the degree is
+multiplicative and <span class="math inline">\(\deg([1]) = 1\)</span>).
+Endomorphisms of degree 1 are exactly the automorphisms. ◻</p>
+</div>
+<div class="corollary">
+<p><strong>Corollary 83</strong> (Classification of units in
+endomorphism rings). <em>The group <span
+class="math inline">\(\operatorname{End}(E_k)^\times\)</span> (units =
+automorphisms) is determined by <span
+class="math inline">\(j(E)\)</span>:</em></p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><em><span
+class="math inline">\(j\)</span>-invariant</em></th>
+<th style="text-align: center;"><em><span
+class="math inline">\(\operatorname{End}(E_k)^\times\)</span></em></th>
+<th style="text-align: center;"><em><span
+class="math inline">\(|\operatorname{Aut}(E_k, O)|\)</span></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><em><span class="math inline">\(j \neq
+0, 1728\)</span></em></td>
+<td style="text-align: center;"><em><span class="math inline">\(\{\pm
+1\}\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(2\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span class="math inline">\(j =
+1728\)</span></em></td>
+<td style="text-align: center;"><em><span class="math inline">\(\{\pm 1,
+\pm i\}\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(4\)</span></em></td>
+</tr>
+<tr>
+<td style="text-align: center;"><em><span class="math inline">\(j =
+0\)</span></em></td>
+<td style="text-align: center;"><em><span class="math inline">\(\{\pm 1,
+\pm \omega, \pm \omega^2\}\)</span></em></td>
+<td style="text-align: center;"><em><span
+class="math inline">\(6\)</span></em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>where <span class="math inline">\(\omega = e^{2\pi i/3}\)</span>
+is a primitive cube root of unity.</em></p>
+</div>
+<div class="proof">
+<p><em>Proof.</em> The key observation is that <span
+class="math inline">\(\operatorname{End}(E_k)^\times\)</span> consists
+of endomorphisms of degree 1, and these are precisely determined by the
+<span class="math inline">\(j\)</span>-invariant regardless of whether
+the full endomorphism ring is commutative or not.</p>
+<p><strong>In characteristic 0</strong> (e.g., over <span
+class="math inline">\(\mathbb{C}\)</span>):</p>
+<ul>
+<li><p>For <span class="math inline">\(j \neq 0, 1728\)</span>: <span
+class="math inline">\(\operatorname{End}(E_k) = \mathbb{Z}\)</span> or
+an order in an imaginary quadratic field <span class="math inline">\(K
+\neq \mathbb{Q}(i), \mathbb{Q}(\omega)\)</span>. Units are <span
+class="math inline">\(\{\pm 1\}\)</span>.</p></li>
+<li><p>For <span class="math inline">\(j = 1728\)</span>: <span
+class="math inline">\(\operatorname{End}(E_k)\)</span> is an order in
+<span class="math inline">\(\mathbb{Q}(i)\)</span>. Units are <span
+class="math inline">\(\{\pm 1, \pm i\}\)</span>.</p></li>
+<li><p>For <span class="math inline">\(j = 0\)</span>: <span
+class="math inline">\(\operatorname{End}(E_k)\)</span> is an order in
+<span class="math inline">\(\mathbb{Q}(\omega)\)</span>. Units are <span
+class="math inline">\(\{\pm 1, \pm \omega, \pm
+\omega^2\}\)</span>.</p></li>
+</ul>
+<p><strong>In characteristic <span class="math inline">\(p &gt;
+3\)</span></strong>: For <em>supersingular</em> curves, <span
+class="math inline">\(\operatorname{End}(E_k)\)</span> is a maximal
+order in a quaternion algebra, which is non-commutative. However, the
+degree-1 endomorphisms (units) still form the same finite groups as
+above, because:</p>
+<ul>
+<li><p>The center of <span
+class="math inline">\(\operatorname{End}(E_k)\)</span> contains an
+imaginary quadratic order, and</p></li>
+<li><p>Units of degree 1 must lie in this center and satisfy the same
+constraints.</p></li>
+</ul>
+<p>Thus <span class="math inline">\(|\operatorname{Aut}(E_k, O)| \in
+\{2, 4, 6\}\)</span> holds in all characteristics <span
+class="math inline">\(&gt; 3\)</span>, with the value determined by
+<span class="math inline">\(j(E)\)</span>. ◻</p>
+</div>
+<div class="remark">
+<p><strong>Remark 84</strong>. The cases <span class="math inline">\(j =
+0\)</span> and <span class="math inline">\(j = 1728\)</span> are exactly
+those where the endomorphism ring contains an imaginary quadratic order
+with more than 2 units. This is no coincidence: the extra automorphisms
+<em>are</em> the extra units. In characteristic 0, these are precisely
+the CM curves with <span
+class="math inline">\(\operatorname{End}(E_k)\)</span> an order in <span
+class="math inline">\(\mathbb{Q}(i)\)</span> or <span
+class="math inline">\(\mathbb{Q}(\omega)\)</span>.</p>
+</div>
+<h1 id="conclusion">Conclusion</h1>
+<p>We have established the following facts for elliptic curves over an
+algebraically closed field <span class="math inline">\(k\)</span> with
+<span class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>:</p>
+<ol>
+<li><p><strong>Explicit structure for <span class="math inline">\(j =
+0\)</span>:</strong> For <span class="math inline">\(E\)</span> with
+<span class="math inline">\(j(E) = 0\)</span>, we have <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| = 6\)</span>,
+with automorphisms explicitly given by: <span
+class="math display">\[\phi_\zeta: (x, y) \mapsto (\zeta^2 x, \zeta^3 y)
+\quad \text{for } \zeta \in \mu_6.\]</span></p></li>
+<li><p><strong>Group structure:</strong> The automorphism group <span
+class="math inline">\(\operatorname{Aut}(E_{\bar{k}}, O) \cong
+\mathbb{Z}/6\mathbb{Z}\)</span> is cyclic of order 6.</p></li>
+<li><p><strong>Completeness:</strong> No other automorphisms exist, as
+proven by direct computation of all possible Weierstrass coordinate
+changes.</p></li>
+<li><p><strong>Global optimality:</strong> The maximum <span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)| = 6\)</span>
+is achieved <strong>only</strong> for <span class="math inline">\(j =
+0\)</span>. For <span class="math inline">\(j = 1728\)</span>, we get
+<span class="math inline">\(|\operatorname{Aut}| = 4\)</span>; for all
+other <span class="math inline">\(j\)</span>, we get <span
+class="math inline">\(|\operatorname{Aut}| = 2\)</span>.</p></li>
+<li><p><strong>Exhaustive classification:</strong> Every elliptic curve
+over <span class="math inline">\(\bar{k}\)</span> has some <span
+class="math inline">\(j\)</span>-invariant, and the classification
+theorem determines <span
+class="math inline">\(|\operatorname{Aut}|\)</span> for all possible
+<span class="math inline">\(j\)</span>. No “hidden” curves with larger
+automorphism groups can exist in characteristic <span
+class="math inline">\(&gt; 3\)</span>.</p></li>
+<li><p><strong>Cryptographic relevance:</strong> For Pollard’s rho
+algorithm on ECDLP, the speedup factor <span
+class="math inline">\(\sqrt{|\operatorname{Aut}|}\)</span> is maximized
+at <span class="math inline">\(\sqrt{6} \approx 2.45\)</span> for curves
+with <span class="math inline">\(j = 0\)</span>, such as
+secp256k1.</p></li>
+</ol>
+<div class="thebibliography">
+<p><span>9</span></p>
+<p>Joseph H. Silverman, <em>The Arithmetic of Elliptic Curves</em>,
+Graduate Texts in Mathematics, vol. 106, Springer-Verlag, New York, 2nd
+edition, 2009.</p>
+<p>Joseph H. Silverman, <em>Advanced Topics in the Arithmetic of
+Elliptic Curves</em>, Graduate Texts in Mathematics, vol. 151,
+Springer-Verlag, New York, 1994.</p>
+<p>Dale Husemöller, <em>Elliptic Curves</em>, Graduate Texts in
+Mathematics, vol. 111, Springer-Verlag, New York, 2nd edition, 2004.</p>
+<p>Lawrence C. Washington, <em>Elliptic Curves: Number Theory and
+Cryptography</em>, Discrete Mathematics and Its Applications, Chapman
+&amp; Hall/CRC, 2nd edition, 2008.</p>
+<p>Max Kronberg, Muhammad Afzal Soomro, and Jaap Top, <em>Twists of
+Elliptic Curves</em>, Symmetry, Integrability and Geometry: Methods and
+Applications (SIGMA), vol. 13, 083, 2017.</p>
+</div>
+<h1 id="summary-of-key-results">Summary of Key Results</h1>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span
+class="math inline">\(j\)</span>-invariant</th>
+<th style="text-align: center;"><span
+class="math inline">\(|\operatorname{Aut}(E_{\bar{k}}, O)|\)</span></th>
+<th style="text-align: center;">Structure</th>
+<th style="text-align: left;">Representative curve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j \neq 0,
+1728\)</span></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span
+class="math inline">\(\mathbb{Z}/2\mathbb{Z}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(y^2 = x^3 + ax
++ b\)</span> (generic)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j =
+1728\)</span></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span
+class="math inline">\(\mathbb{Z}/4\mathbb{Z}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(y^2 = x^3 +
+x\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j =
+0\)</span></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;"><span
+class="math inline">\(\mathbb{Z}/6\mathbb{Z}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(y^2 = x^3 +
+1\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Valid for:</strong> Algebraically closed field <span
+class="math inline">\(k\)</span> with <span
+class="math inline">\(\operatorname{char}(k) &gt; 3\)</span>.</p>
+<p><strong>Twist Structure (Section <a href="#sec:twists"
+data-reference-type="ref"
+data-reference="sec:twists">7</a>):</strong></p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span
+class="math inline">\(j\)</span>-invariant</th>
+<th style="text-align: center;"><span
+class="math inline">\(|\operatorname{Aut}|\)</span></th>
+<th style="text-align: left;">Types of twists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j \neq 0,
+1728\)</span></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;">Quadratic only</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j =
+1728\)</span></td>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;">Quadratic, quartic</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math inline">\(j =
+0\)</span></td>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;">Quadratic, cubic, sextic</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Key insight:</strong> Sextic twists exist <span
+class="math inline">\(\Leftrightarrow\)</span> <span
+class="math inline">\(|\operatorname{Aut}| = 6\)</span> <span
+class="math inline">\(\Leftrightarrow\)</span> <span
+class="math inline">\(j = 0\)</span>.</p>
+<h1 id="verification-of-key-formulas">Verification of Key Formulas</h1>
+<p>The following formulas have been verified computationally:</p>
+<ol>
+<li><p><strong>Discriminant:</strong> <span class="math inline">\(\Delta
+= -16(4a^3 + 27b^2)\)</span></p></li>
+<li><p><strong><span
+class="math inline">\(j\)</span>-invariant:</strong> <span
+class="math inline">\(j = 1728 \cdot \frac{4a^3}{4a^3 +
+27b^2}\)</span></p></li>
+<li><p><strong><span class="math inline">\(j = 0 \Leftrightarrow a =
+0\)</span></strong> (for non-singular curves)</p></li>
+<li><p><strong>Automorphism formula:</strong> <span
+class="math inline">\((x,y) \mapsto (\zeta^2 x, \zeta^3 y)\)</span>
+preserves <span class="math inline">\(y^2 = x^3 + 1\)</span> iff <span
+class="math inline">\(\zeta^6 = 1\)</span></p></li>
+<li><p><strong>Powers of <span
+class="math inline">\(\omega\)</span>:</strong> For <span
+class="math inline">\(\omega^3 = 1\)</span>, <span
+class="math inline">\(\omega \neq 1\)</span>: <span
+class="math inline">\(\omega^4 = \omega\)</span>, <span
+class="math inline">\(\omega^6 = 1\)</span>, <span
+class="math inline">\(\omega^2 + \omega + 1 = 0\)</span></p></li>
+<li><p><strong>secp256k1:</strong> <span class="math inline">\(p =
+2^{256} - 2^{32} - 977 \equiv 1 \pmod{3}\)</span>, and the given <span
+class="math inline">\(\omega\)</span> satisfies <span
+class="math inline">\(\omega^3 \equiv 1 \pmod{p}\)</span></p></li>
+</ol>
+<p>All verifications pass with numerical tests over multiple primes.</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <a href="/elliptic-curve/blog/" class="back-link">← Back to Blog</a>
+    </footer>
+</article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Elliptic Curve Lab. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
